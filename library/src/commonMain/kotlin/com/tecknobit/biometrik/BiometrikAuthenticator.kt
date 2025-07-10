@@ -16,6 +16,11 @@ expect fun BiometrikAuthenticator(
     onAuthenticationNotSet: @Composable () -> Unit = onSuccess,
 )
 
+internal fun validAuthenticationAttempt() {
+    alreadyAuthenticated = true
+}
+
+@Composable
 internal fun authenticateIfNeeded(
     requestOnFirstOpenOnly: Boolean = true,
     onSkip: @Composable () -> Unit,
@@ -24,5 +29,5 @@ internal fun authenticateIfNeeded(
     if (requestOnFirstOpenOnly && alreadyAuthenticated)
         onSkip()
     else
-        onAuth.invoke()
+        onAuth()
 }

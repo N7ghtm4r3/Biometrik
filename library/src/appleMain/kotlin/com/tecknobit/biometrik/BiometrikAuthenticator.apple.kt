@@ -22,36 +22,49 @@ actual fun BiometrikAuthenticator(
         requestOnFirstOpenOnly = requestOnFirstOpenOnly,
         onSkip = onSuccess,
         onAuth = {
-            memScoped {
-                val context = LAContext()
-                val errorPointer = alloc<ObjCObjectVar<NSError?>>()
-                val canEvaluate = context.canEvaluatePolicy(
-                    policy = LAPolicyDeviceOwnerAuthenticationWithBiometrics,
-                    error = errorPointer.ptr
-                )
-                if (canEvaluate) {
-                    if (context.biometryType == LABiometryTypeNone)
-                        onHardwareUnavailable()
-                    else {
-                        context.evaluatePolicy(
-                            policy = LAPolicyDeviceOwnerAuthenticationWithBiometrics,
-                            localizedReason = reason
-                        ) { success, _ ->
-                            if (success) {
-                                alreadyAuthenticated = true
-                                onSuccess()
-                            } else
-                                onFailure()
-                        }
-                    }
+            val context = LAContext()
+            val errorPointer = nativeHeap.alloc<ObjCObjectVar<NSError?>>()
+            val canEvaluate = context.canEvaluatePolicy(
+                policy = LAPolicyDeviceOwnerAuthenticationWithBiometrics,
+                error = errorPointer.ptr
+            )
+            if (canEvaluate) {
+                nativeHeap.free(errorPointer)
+                if (context.biometryType == LABiometryTypeNone) {
+                    validAuthenticationAttempt()
+                    onHardwareUnavailable()
                 } else {
-                    val errorCode = errorPointer.value?.code
-                    when (errorCode) {
-                        LAErrorBiometryNotEnrolled -> onAuthenticationNotSet()
-                        LAErrorBiometryNotAvailable -> onFeatureUnavailable()
-                        LAErrorPasscodeNotSet -> onAuthenticationNotSet()
-                        else -> onFailure()
+                    context.evaluatePolicy(
+                        policy = LAPolicyDeviceOwnerAuthenticationWithBiometrics,
+                        localizedReason = reason
+                    ) { success, _ ->
+                        if (success) {
+                            validAuthenticationAttempt()
+                            onSuccess()
+                        } else
+                            onFailure()
                     }
+                }
+            } else {
+                val errorCode = errorPointer.value?.code
+                nativeHeap.free(errorPointer)
+                when (errorCode) {
+                    LAErrorBiometryNotEnrolled -> {
+                        validAuthenticationAttempt()
+                        onAuthenticationNotSet()
+                    }
+
+                    LAErrorBiometryNotAvailable -> {
+                        validAuthenticationAttempt()
+                        onFeatureUnavailable()
+                    }
+
+                    LAErrorPasscodeNotSet -> {
+                        validAuthenticationAttempt()
+                        onAuthenticationNotSet()
+                    }
+
+                    else -> onFailure()
                 }
             }
         }
