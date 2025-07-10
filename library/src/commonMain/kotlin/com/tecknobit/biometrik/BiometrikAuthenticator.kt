@@ -2,10 +2,10 @@ package com.tecknobit.biometrik
 
 import androidx.compose.runtime.Composable
 
-internal var alreadyAuthenticated = false
 
 @Composable
 expect fun BiometrikAuthenticator(
+    state: BiometrikState = rememberBiometrikState(),
     title: String,
     reason: String,
     requestOnFirstOpenOnly: Boolean = true,
@@ -16,17 +16,13 @@ expect fun BiometrikAuthenticator(
     onAuthenticationNotSet: @Composable () -> Unit = onSuccess,
 )
 
-internal fun validAuthenticationAttempt() {
-    alreadyAuthenticated = true
-}
-
 @Composable
 internal fun authenticateIfNeeded(
-    requestOnFirstOpenOnly: Boolean = true,
+    state: BiometrikState,
     onSkip: @Composable () -> Unit,
     onAuth: @Composable () -> Unit,
 ) {
-    if (requestOnFirstOpenOnly && alreadyAuthenticated)
+    if (state.isAuthToSkip())
         onSkip()
     else
         onAuth()

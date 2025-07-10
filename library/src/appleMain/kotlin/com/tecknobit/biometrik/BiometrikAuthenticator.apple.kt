@@ -2,13 +2,14 @@
 
 package com.tecknobit.biometrik
 
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import kotlinx.cinterop.*
 import platform.Foundation.NSError
 import platform.LocalAuthentication.*
 
 @Composable
 actual fun BiometrikAuthenticator(
+    state: BiometrikState,
     title: String,
     reason: String,
     requestOnFirstOpenOnly: Boolean,
@@ -19,7 +20,7 @@ actual fun BiometrikAuthenticator(
     onAuthenticationNotSet: @Composable () -> Unit,
 ) {
     authenticateIfNeeded(
-        requestOnFirstOpenOnly = requestOnFirstOpenOnly,
+        state = state,
         onSkip = onSuccess,
         onAuth = {
             val context = LAContext()
@@ -29,44 +30,89 @@ actual fun BiometrikAuthenticator(
                 error = errorPointer.ptr
             )
             if (canEvaluate) {
-                nativeHeap.free(errorPointer)
-                if (context.biometryType == LABiometryTypeNone) {
-                    validAuthenticationAttempt()
-                    onHardwareUnavailable()
-                } else {
-                    context.evaluatePolicy(
-                        policy = LAPolicyDeviceOwnerAuthenticationWithBiometrics,
-                        localizedReason = reason
-                    ) { success, _ ->
-                        if (success) {
-                            validAuthenticationAttempt()
-                            onSuccess()
-                        } else
-                            onFailure()
-                    }
-                }
+                authEvaluated(
+                    state = state,
+                    context = context,
+                    errorPointer = errorPointer,
+                    reason = reason,
+                    onSuccess = onSuccess,
+                    onFailure = onFailure,
+                    onHardwareUnavailable = onHardwareUnavailable
+                )
             } else {
-                val errorCode = errorPointer.value?.code
-                nativeHeap.free(errorPointer)
-                when (errorCode) {
-                    LAErrorBiometryNotEnrolled -> {
-                        validAuthenticationAttempt()
-                        onAuthenticationNotSet()
-                    }
-
-                    LAErrorBiometryNotAvailable -> {
-                        validAuthenticationAttempt()
-                        onFeatureUnavailable()
-                    }
-
-                    LAErrorPasscodeNotSet -> {
-                        validAuthenticationAttempt()
-                        onAuthenticationNotSet()
-                    }
-
-                    else -> onFailure()
-                }
+                authNotEvaluated(
+                    state = state,
+                    errorPointer = errorPointer,
+                    onFailure = onFailure,
+                    onFeatureUnavailable = onFeatureUnavailable,
+                    onAuthenticationNotSet = onAuthenticationNotSet
+                )
             }
         }
     )
+}
+
+@Composable
+private fun authEvaluated(
+    state: BiometrikState,
+    context: LAContext,
+    errorPointer: ObjCObjectVar<NSError?>,
+    reason: String,
+    onSuccess: @Composable () -> Unit,
+    onFailure: @Composable () -> Unit,
+    onHardwareUnavailable: @Composable () -> Unit,
+) {
+    nativeHeap.free(errorPointer)
+    if (context.biometryType == LABiometryTypeNone) {
+        state.validAuthenticationAttempt()
+        onHardwareUnavailable()
+    } else {
+        var authenticatedSuccessfully: Boolean? by remember { mutableStateOf(null) }
+        LaunchedEffect(state.authAttemptsTrigger.value) {
+            authenticatedSuccessfully = null
+            context.evaluatePolicy(
+                policy = LAPolicyDeviceOwnerAuthenticationWithBiometrics,
+                localizedReason = reason
+            ) { success, _ ->
+                authenticatedSuccessfully = success
+            }
+        }
+        authenticatedSuccessfully?.let { success ->
+            if (success) {
+                state.validAuthenticationAttempt()
+                onSuccess()
+            } else
+                onFailure()
+        }
+    }
+}
+
+@Composable
+private fun authNotEvaluated(
+    state: BiometrikState,
+    errorPointer: ObjCObjectVar<NSError?>,
+    onFailure: @Composable () -> Unit,
+    onFeatureUnavailable: @Composable () -> Unit,
+    onAuthenticationNotSet: @Composable () -> Unit,
+) {
+    val errorCode = errorPointer.value?.code
+    nativeHeap.free(errorPointer)
+    when (errorCode) {
+        LAErrorBiometryNotEnrolled -> {
+            state.validAuthenticationAttempt()
+            onAuthenticationNotSet()
+        }
+
+        LAErrorBiometryNotAvailable -> {
+            state.validAuthenticationAttempt()
+            onFeatureUnavailable()
+        }
+
+        LAErrorPasscodeNotSet -> {
+            state.validAuthenticationAttempt()
+            onAuthenticationNotSet()
+        }
+
+        else -> onFailure()
+    }
 }

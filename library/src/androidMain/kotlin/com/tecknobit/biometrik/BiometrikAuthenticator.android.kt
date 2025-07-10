@@ -7,6 +7,7 @@ import com.tecknobit.biometrik.enums.AuthenticationResult.*
 
 @Composable
 actual fun BiometrikAuthenticator(
+    state: BiometrikState,
     title: String,
     reason: String,
     requestOnFirstOpenOnly: Boolean,
@@ -17,7 +18,7 @@ actual fun BiometrikAuthenticator(
     onAuthenticationNotSet: @Composable () -> Unit,
 ) {
     authenticateIfNeeded(
-        requestOnFirstOpenOnly = requestOnFirstOpenOnly,
+        state = state,
         onSkip = onSuccess,
         onAuth = {
             val activity = LocalActivity.current as AppCompatActivity
@@ -31,18 +32,18 @@ actual fun BiometrikAuthenticator(
             val biometricResult by biometricPromptManager.promptResults.collectAsState(
                 initial = null
             )
-            LaunchedEffect(Unit) {
+            LaunchedEffect(state.authAttemptsTrigger.value) {
                 biometricPromptManager.show()
             }
             biometricResult?.let { result ->
                 when (result) {
                     HARDWARE_UNAVAILABLE -> {
-                        validAuthenticationAttempt()
+                        state.validAuthenticationAttempt()
                         onHardwareUnavailable()
                     }
 
                     FEATURE_UNAVAILABLE -> {
-                        validAuthenticationAttempt()
+                        state.validAuthenticationAttempt()
                         onFeatureUnavailable()
                     }
 
@@ -51,12 +52,12 @@ actual fun BiometrikAuthenticator(
                     }
 
                     AUTHENTICATION_SUCCESS -> {
-                        validAuthenticationAttempt()
+                        state.validAuthenticationAttempt()
                         onSuccess()
                     }
 
                     AUTHENTICATION_NOT_SET -> {
-                        validAuthenticationAttempt()
+                        state.validAuthenticationAttempt()
                         onAuthenticationNotSet()
                     }
                 }
