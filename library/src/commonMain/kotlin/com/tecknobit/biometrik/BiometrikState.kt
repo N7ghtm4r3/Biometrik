@@ -29,7 +29,7 @@ class BiometrikState internal constructor(
 
     internal val authAttemptsTrigger: MutableState<Long> = mutableLongStateOf(initial)
 
-    fun retry() {
+    fun reAuth() {
         if (!requestOnFirstOpenOnly || !alreadyAuthenticated)
             authAttemptsTrigger.value = Random.nextLong()
     }
