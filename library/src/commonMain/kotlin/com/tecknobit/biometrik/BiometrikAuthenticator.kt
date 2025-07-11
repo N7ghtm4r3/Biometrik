@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 @Composable
 expect fun BiometrikAuthenticator(
     state: BiometrikState = rememberBiometrikState(),
+    appName: String,
     title: String,
     reason: String,
     requestOnFirstOpenOnly: Boolean = true,
