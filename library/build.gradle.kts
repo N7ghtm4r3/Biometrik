@@ -104,7 +104,7 @@ kotlin {
         }
 
         wasmJsMain.dependencies {
-
+            implementation(libs.kmprefs)
         }
 
     }

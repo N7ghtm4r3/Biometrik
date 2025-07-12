@@ -1,6 +1,7 @@
 package com.tecknobit.biometrik
 
 import androidx.compose.runtime.*
+import com.tecknobit.kmprefs.KMPrefs
 import kotlinx.coroutines.await
 import org.khronos.webgl.Uint8Array
 
@@ -23,73 +24,84 @@ actual fun BiometrikAuthenticator(
         onAuth = {
             var bioAuthAvailable: Boolean? by remember { mutableStateOf(null) }
             LaunchedEffect(Unit) {
-                val available: JsBoolean = PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable().await()
-                bioAuthAvailable = available.toBoolean()
+                try {
+                    val available: JsBoolean =
+                        PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable().await()
+                    bioAuthAvailable = available.toBoolean()
+                } catch (e: JsException) {
+                    bioAuthAvailable = false
+                }
             }
             bioAuthAvailable?.let { available ->
                 if (available) {
                     val credentialsNavigator = credentialsNavigator()
+                    val localStorage = KMPrefs(
+                        path = appName
+                    )
                     val challenge = Uint8Array(32)
                     loadChallenge(
                         challenge = challenge
                     )
-                    val publicKey = createPublicKey(
-                        challenge = challenge,
-                        appName = appName,
-                        appId = TextEncoder().encode(
-                            input = appName
-                        )
+                    val keyId = localStorage.retrieveString(
+                        key = appName
                     )
-                    LaunchedEffect(Unit) {
-                        val a = credentialsNavigator.create(
-                            publicKey = publicKey
-                        ).await<PublicKeyCredential>()
-                        println(a.id)
+                    val publicKey: JsAny
+                    if (keyId == null) {
+                        publicKey = createPublicKey(
+                            challenge = challenge,
+                            appName = appName,
+                            appId = TextEncoder().encode(
+                                input = appName
+                            )
+                        )
+                        LaunchedEffect(Unit) {
+                            try {
+                                val publicKeyCredential = credentialsNavigator.create(
+                                    publicKey = publicKey
+                                ).await<PublicKeyCredential>()
+                                localStorage.storeString(
+                                    key = appName,
+                                    value = publicKeyCredential.id.toString()
+                                )
+                            } catch (e: JsException) {
+                            }
+                        }
+                    } else {
+                        publicKey = obtainPublicKey(
+                            keyId = TextEncoder().encode(
+                                input = keyId
+                            ),
+                            challenge = challenge
+                        )
+                        var success: Boolean? by remember { mutableStateOf(null) }
+                        LaunchedEffect(Unit) {
+                            try {
+                                credentialsNavigator.get(
+                                    publicKey = publicKey
+                                ).await<PublicKeyCredential>()
+                                success = true
+                            } catch (e: JsException) {
+                                e.printStackTrace()
+                                success = false
+                            }
+                        }
+                        success?.let {
+                            if (it) {
+                                onSuccess()
+                            } else
+                                onFailure()
+                        }
                     }
-                    onSuccess()
                 } else {
                     onFeatureUnavailable()
+                    state.validAuthenticationAttempt()
                 }
             }
         }
     )
-//    val challenge = Uint8Array(32)
-//    loadUInt8Array(
-//        array = challenge
-//    )
-//    val userId = Uint8Array(16)
-//    loadUInt8Array(
-//        array = userId
-//    )
-//    val publicKey = createPublicKey(
-//        challenge = challenge,
-//        appName = window.navigator.appName,
-//        userId = userId
-//    )
-//    registerPublicKey(
-//        publicKey = publicKey
-//    )
-
-
-//    var authenticated :Boolean? by remember { mutableStateOf(null) }
-//    try {
-//        requestAuth(
-//            options = options
-//        )
-//        authenticated = true
-//    } catch (e: Throwable) {
-//        val error = e.toJsReference()
-//        println(error)
-//        authenticated = false
-//    }
-//    authenticated?.let { success ->
-//        if(success) {
-//            onSuccess()
-//        } else {
-//            onFailure()
-//        }
-//    }
 }
+
+private fun credentialsNavigator(): CredentialsNavigator = js("window.navigator.credentials")
 
 private fun loadChallenge(
     challenge: Uint8Array,
@@ -127,16 +139,21 @@ private fun createPublicKey(
     """
 )
 
-private fun credentialsNavigator(): CredentialsNavigator = js("window.navigator.credentials")
-
-private fun registerPublicKey(
-    publicKey: JsAny,
-): Unit = js(
+private fun obtainPublicKey(
+    keyId: Uint8Array,
+    challenge: Uint8Array,
+): JsAny = js(
     """
-       {
-           const cred = window.navigator.credentials.create(publicKey).await();
-           console.log(cred.id);
-       }
+    ({
+        publicKey: {
+            challenge: challenge,
+            timeout: 60000,
+            userVerification: "preferred",
+            allowCredentials: [{
+                type: "public-key",
+                id: keyId
+            }]
+        }
+    })
     """
 )
-
