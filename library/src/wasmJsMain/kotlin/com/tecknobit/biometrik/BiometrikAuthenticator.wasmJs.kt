@@ -151,6 +151,7 @@ private fun createPublicKey(
             },
             pubKeyCredParams: [{ type: "public-key", alg: -7 }],
             authenticatorSelection: {
+               authenticatorAttachment: 'platform',
                userVerification: 'required'
             },
             timeout: 60000,
@@ -207,7 +208,11 @@ private fun obtainPublicKey(
             allowCredentials: [{
                 type: 'public-key',
                 id: keyId
-            }]
+            }],
+            authenticatorSelection: {
+               authenticatorAttachment: 'platform',
+               userVerification: 'required'
+            }
         }
     })
     """
