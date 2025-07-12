@@ -35,6 +35,7 @@ actual fun BiometrikAuthenticator(
             bioAuthAvailable?.let { available ->
                 if (available) {
                     performBioAuth(
+                        state = state,
                         appName = appName,
                         onSuccess = onSuccess,
                         onFailure = onFailure
@@ -50,6 +51,7 @@ actual fun BiometrikAuthenticator(
 
 @Composable
 private fun performBioAuth(
+    state: BiometrikState,
     appName: String,
     onSuccess: @Composable () -> Unit,
     onFailure: @Composable () -> Unit,
@@ -76,6 +78,7 @@ private fun performBioAuth(
         )
     } else {
         retrieveExistingKeyAndAuth(
+            state = state,
             keyId = keyId,
             challenge = challenge,
             credentialsNavigator = credentialsNavigator,
@@ -84,6 +87,16 @@ private fun performBioAuth(
         )
     }
 }
+
+private fun loadChallenge(
+    challenge: Uint8Array,
+): Unit = js(
+    """
+        {
+            window.crypto.getRandomValues(challenge)
+        }
+    """
+)
 
 private fun credentialsNavigator(): CredentialsNavigator = js("window.navigator.credentials")
 
@@ -103,17 +116,15 @@ private fun registerNewKeyAndAuth(
             input = appName
         )
     )
-    var keyId = ""
     var keyRegisteredSuccessfully: Boolean? by remember { mutableStateOf(null) }
     LaunchedEffect(Unit) {
         try {
             val publicKeyCredential = credentialsNavigator.create(
                 publicKey = publicKey
             ).await<PublicKeyCredential>()
-            keyId = publicKeyCredential.id.toString()
             localStorage.storeString(
                 key = appName,
-                value = keyId
+                value = publicKeyCredential.id.toString()
             )
             keyRegisteredSuccessfully = true
         } catch (e: JsException) {
@@ -121,15 +132,9 @@ private fun registerNewKeyAndAuth(
         }
     }
     keyRegisteredSuccessfully?.let { success ->
-        if (success) {
-            retrieveExistingKeyAndAuth(
-                keyId = keyId,
-                challenge = challenge,
-                credentialsNavigator = credentialsNavigator,
-                onSuccess = onSuccess,
-                onFailure = onFailure
-            )
-        } else
+        if (success)
+            onSuccess()
+        else
             onFailure()
     }
 }
@@ -163,6 +168,7 @@ private fun createPublicKey(
 
 @Composable
 private fun retrieveExistingKeyAndAuth(
+    state: BiometrikState,
     keyId: String,
     challenge: Uint8Array,
     credentialsNavigator: CredentialsNavigator,
@@ -176,14 +182,14 @@ private fun retrieveExistingKeyAndAuth(
         challenge = challenge
     )
     var success: Boolean? by remember { mutableStateOf(null) }
-    LaunchedEffect(Unit) {
+    LaunchedEffect(state.authAttemptsTrigger.value) {
         try {
             credentialsNavigator.get(
                 publicKey = publicKey
             ).await<PublicKeyCredential>()
             success = true
         } catch (e: JsException) {
-            e.printStackTrace()
+            println(e.message)
             success = false
         }
     }
@@ -215,15 +221,5 @@ private fun obtainPublicKey(
             }
         }
     })
-    """
-)
-
-private fun loadChallenge(
-    challenge: Uint8Array,
-): Unit = js(
-    """
-        {
-            window.crypto.getRandomValues(challenge)
-        }
     """
 )
