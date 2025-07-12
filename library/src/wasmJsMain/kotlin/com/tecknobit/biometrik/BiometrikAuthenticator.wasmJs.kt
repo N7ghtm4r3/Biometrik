@@ -247,6 +247,12 @@ private fun handleAuth(
     }
     result?.let {
         when (it) {
+            AUTHENTICATION_SUCCESS -> {
+                state.validAuthenticationAttempt()
+                onSuccess()
+            }
+
+            AUTHENTICATION_FAILED -> onFailure()
             HARDWARE_UNAVAILABLE -> {
                 state.validAuthenticationAttempt()
                 onHardwareUnavailable()
@@ -260,12 +266,6 @@ private fun handleAuth(
             AUTHENTICATION_NOT_SET -> {
                 state.validAuthenticationAttempt()
                 onAuthenticationNotSet()
-            }
-
-            AUTHENTICATION_FAILED -> onFailure()
-            AUTHENTICATION_SUCCESS -> {
-                state.validAuthenticationAttempt()
-                onSuccess()
             }
         }
     }
