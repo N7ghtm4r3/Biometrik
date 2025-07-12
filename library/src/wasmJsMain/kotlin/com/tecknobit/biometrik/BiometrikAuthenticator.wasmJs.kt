@@ -69,6 +69,7 @@ private fun performBioAuth(
     )
     if (keyId == null) {
         registerNewKeyAndAuth(
+            state = state,
             challenge = challenge,
             appName = appName,
             credentialsNavigator = credentialsNavigator,
@@ -102,6 +103,7 @@ private fun credentialsNavigator(): CredentialsNavigator = js("window.navigator.
 
 @Composable
 private fun registerNewKeyAndAuth(
+    state: BiometrikState,
     challenge: Uint8Array,
     appName: String,
     credentialsNavigator: CredentialsNavigator,
@@ -132,9 +134,10 @@ private fun registerNewKeyAndAuth(
         }
     }
     keyRegisteredSuccessfully?.let { success ->
-        if (success)
+        if (success) {
+            state.validAuthenticationAttempt()
             onSuccess()
-        else
+        } else
             onFailure()
     }
 }
@@ -195,6 +198,7 @@ private fun retrieveExistingKeyAndAuth(
     }
     success?.let {
         if (it) {
+            state.validAuthenticationAttempt()
             onSuccess()
         } else
             onFailure()
@@ -211,14 +215,7 @@ private fun obtainPublicKey(
             challenge: challenge,
             timeout: 60000,
             userVerification: 'required',
-            allowCredentials: [{
-                type: 'public-key',
-                id: keyId
-            }],
-            authenticatorSelection: {
-               authenticatorAttachment: 'platform',
-               userVerification: 'required'
-            }
+            
         }
     })
     """
