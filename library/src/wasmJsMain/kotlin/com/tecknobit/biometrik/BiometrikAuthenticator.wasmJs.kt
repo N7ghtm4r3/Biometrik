@@ -1,9 +1,17 @@
 package com.tecknobit.biometrik
 
 import androidx.compose.runtime.*
+import com.tecknobit.biometrik.enums.AuthenticationResult
+import com.tecknobit.biometrik.enums.AuthenticationResult.*
 import com.tecknobit.kmprefs.KMPrefs
 import kotlinx.coroutines.await
 import org.khronos.webgl.Uint8Array
+
+private const val NOT_SUPPORTED_ERROR = "NotSupportedError"
+
+private const val NOT_PRESENT_ERROR = "NotPresentError"
+
+private const val INVALID_STATE_ERROR = "InvalidStateError"
 
 @Composable
 actual fun BiometrikAuthenticator(
@@ -38,11 +46,14 @@ actual fun BiometrikAuthenticator(
                         state = state,
                         appName = appName,
                         onSuccess = onSuccess,
-                        onFailure = onFailure
+                        onFailure = onFailure,
+                        onHardwareUnavailable = onHardwareUnavailable,
+                        onFeatureUnavailable = onFeatureUnavailable,
+                        onAuthenticationNotSet = onAuthenticationNotSet
                     )
                 } else {
-                    onFeatureUnavailable()
                     state.validAuthenticationAttempt()
+                    onFeatureUnavailable()
                 }
             }
         }
@@ -55,6 +66,9 @@ private fun performBioAuth(
     appName: String,
     onSuccess: @Composable () -> Unit,
     onFailure: @Composable () -> Unit,
+    onHardwareUnavailable: @Composable () -> Unit,
+    onFeatureUnavailable: @Composable () -> Unit,
+    onAuthenticationNotSet: @Composable () -> Unit,
 ) {
     val credentialsNavigator = credentialsNavigator()
     val challenge = Uint8Array(32)
@@ -75,16 +89,21 @@ private fun performBioAuth(
             credentialsNavigator = credentialsNavigator,
             localStorage = localStorage,
             onSuccess = onSuccess,
-            onFailure = onFailure
+            onFailure = onFailure,
+            onHardwareUnavailable = onHardwareUnavailable,
+            onFeatureUnavailable = onFeatureUnavailable,
+            onAuthenticationNotSet = onAuthenticationNotSet
         )
     } else {
         retrieveExistingKeyAndAuth(
             state = state,
-            keyId = keyId,
             challenge = challenge,
             credentialsNavigator = credentialsNavigator,
             onSuccess = onSuccess,
-            onFailure = onFailure
+            onFailure = onFailure,
+            onHardwareUnavailable = onHardwareUnavailable,
+            onFeatureUnavailable = onFeatureUnavailable,
+            onAuthenticationNotSet = onAuthenticationNotSet
         )
     }
 }
@@ -110,6 +129,9 @@ private fun registerNewKeyAndAuth(
     localStorage: KMPrefs,
     onSuccess: @Composable () -> Unit,
     onFailure: @Composable () -> Unit,
+    onHardwareUnavailable: @Composable () -> Unit,
+    onFeatureUnavailable: @Composable () -> Unit,
+    onAuthenticationNotSet: @Composable () -> Unit,
 ) {
     val publicKey = createPublicKey(
         challenge = challenge,
@@ -118,9 +140,9 @@ private fun registerNewKeyAndAuth(
             input = appName
         )
     )
-    var keyRegisteredSuccessfully: Boolean? by remember { mutableStateOf(null) }
-    LaunchedEffect(Unit) {
-        try {
+    handleAuth(
+        state = state,
+        authRoutine = {
             val publicKeyCredential = credentialsNavigator.create(
                 publicKey = publicKey
             ).await<PublicKeyCredential>()
@@ -128,18 +150,13 @@ private fun registerNewKeyAndAuth(
                 key = appName,
                 value = publicKeyCredential.id.toString()
             )
-            keyRegisteredSuccessfully = true
-        } catch (e: JsException) {
-            keyRegisteredSuccessfully = false
-        }
-    }
-    keyRegisteredSuccessfully?.let { success ->
-        if (success) {
-            state.validAuthenticationAttempt()
-            onSuccess()
-        } else
-            onFailure()
-    }
+        },
+        onSuccess = onSuccess,
+        onFailure = onFailure,
+        onHardwareUnavailable = onHardwareUnavailable,
+        onFeatureUnavailable = onFeatureUnavailable,
+        onAuthenticationNotSet = onAuthenticationNotSet
+    )
 }
 
 private fun createPublicKey(
@@ -172,41 +189,89 @@ private fun createPublicKey(
 @Composable
 private fun retrieveExistingKeyAndAuth(
     state: BiometrikState,
-    keyId: String,
     challenge: Uint8Array,
     credentialsNavigator: CredentialsNavigator,
     onSuccess: @Composable () -> Unit,
     onFailure: @Composable () -> Unit,
+    onHardwareUnavailable: @Composable () -> Unit,
+    onFeatureUnavailable: @Composable () -> Unit,
+    onAuthenticationNotSet: @Composable () -> Unit,
 ) {
     val publicKey = obtainPublicKey(
-        keyId = TextEncoder().encode(
-            input = keyId
-        ),
         challenge = challenge
     )
-    var success: Boolean? by remember { mutableStateOf(null) }
-    LaunchedEffect(state.authAttemptsTrigger.value) {
-        try {
+    handleAuth(
+        state = state,
+        authRoutine = {
             credentialsNavigator.get(
                 publicKey = publicKey
             ).await<PublicKeyCredential>()
-            success = true
+        },
+        onSuccess = onSuccess,
+        onFailure = onFailure,
+        onHardwareUnavailable = onHardwareUnavailable,
+        onFeatureUnavailable = onFeatureUnavailable,
+        onAuthenticationNotSet = onAuthenticationNotSet
+    )
+}
+
+@Composable
+private fun handleAuth(
+    state: BiometrikState,
+    authRoutine: suspend () -> Unit,
+    onSuccess: @Composable () -> Unit,
+    onFailure: @Composable () -> Unit,
+    onHardwareUnavailable: @Composable () -> Unit,
+    onFeatureUnavailable: @Composable () -> Unit,
+    onAuthenticationNotSet: @Composable () -> Unit,
+) {
+    var result: AuthenticationResult? by remember { mutableStateOf(null) }
+    LaunchedEffect(state.authAttemptsTrigger.value) {
+        try {
+            authRoutine()
+            result = AUTHENTICATION_SUCCESS
         } catch (e: JsException) {
-            println(e.message)
-            success = false
+            val error = e.thrownValue
+            result = if (error == null)
+                AUTHENTICATION_FAILED
+            else {
+                val errorString = error.toString()
+                if (errorString.startsWith(NOT_PRESENT_ERROR))
+                    AUTHENTICATION_NOT_SET
+                else if (errorString.startsWith(NOT_SUPPORTED_ERROR) || errorString.startsWith(INVALID_STATE_ERROR))
+                    HARDWARE_UNAVAILABLE
+                else
+                    AUTHENTICATION_FAILED
+            }
         }
     }
-    success?.let {
-        if (it) {
-            state.validAuthenticationAttempt()
-            onSuccess()
-        } else
-            onFailure()
+    result?.let {
+        when (it) {
+            HARDWARE_UNAVAILABLE -> {
+                state.validAuthenticationAttempt()
+                onHardwareUnavailable()
+            }
+
+            FEATURE_UNAVAILABLE -> {
+                state.validAuthenticationAttempt()
+                onFeatureUnavailable()
+            }
+
+            AUTHENTICATION_NOT_SET -> {
+                state.validAuthenticationAttempt()
+                onAuthenticationNotSet()
+            }
+
+            AUTHENTICATION_FAILED -> onFailure()
+            AUTHENTICATION_SUCCESS -> {
+                state.validAuthenticationAttempt()
+                onSuccess()
+            }
+        }
     }
 }
 
 private fun obtainPublicKey(
-    keyId: Uint8Array,
     challenge: Uint8Array,
 ): JsAny = js(
     """
@@ -214,8 +279,7 @@ private fun obtainPublicKey(
         publicKey: {
             challenge: challenge,
             timeout: 60000,
-            userVerification: 'required',
-            
+            userVerification: 'required'
         }
     })
     """
