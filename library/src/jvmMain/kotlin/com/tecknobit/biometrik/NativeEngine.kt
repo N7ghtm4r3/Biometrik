@@ -4,8 +4,6 @@ import com.sun.jna.Library
 import com.sun.jna.WString
 import java.io.File
 
-private const val DLL_SUFFIX = ".dll"
-
 private const val OS_NAME_KEY = "os.name"
 
 private const val WINDOWS_OS = "Windows"
@@ -19,7 +17,7 @@ internal interface NativeEngine : Library {
             return if (currentOs.startsWith(WINDOWS_OS))
                 windowsEngine
             else
-                windowsEngine // TODO: TO REPLACE WITH THE linuxEngine INSTEAD
+                linuxEngine
         }
 
     }
@@ -32,9 +30,10 @@ internal interface NativeEngine : Library {
 
 internal fun extractDllAbsolutePath(
     dllName: String,
+    suffix: String
 ): String {
-    val dllContent = NativeEngine::class.java.classLoader!!.getResourceAsStream(dllName + DLL_SUFFIX)
-    val tmpDll = File.createTempFile(dllName, DLL_SUFFIX)!!
+    val dllContent = NativeEngine::class.java.classLoader!!.getResourceAsStream(dllName + suffix)
+    val tmpDll = File.createTempFile(dllName, suffix)
     tmpDll.deleteOnExit()
     dllContent.use { input ->
         tmpDll.outputStream().use { output ->

@@ -37,7 +37,7 @@ actual fun BiometrikAuthenticator(
                     val available: JsBoolean =
                         PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable().await()
                     bioAuthAvailable = available.toBoolean()
-                } catch (e: JsException) {
+                } catch (_: JsException) {
                     bioAuthAvailable = false
                 }
             }

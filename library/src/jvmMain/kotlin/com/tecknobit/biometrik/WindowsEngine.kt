@@ -7,7 +7,8 @@ internal interface WindowsEngine : NativeEngine
 // TODO: TO OPTIMIZE WHEN LINUX'S ONE INTEGRATED 
 internal val windowsEngine = Native.load(
     extractDllAbsolutePath(
-        dllName = "WindowsHelloEngine"
+        dllName = "WindowsHelloEngine",
+        suffix = ".dll"
     ),
     WindowsEngine::class.java
 )
