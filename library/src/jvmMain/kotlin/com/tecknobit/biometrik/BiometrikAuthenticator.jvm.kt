@@ -1,6 +1,9 @@
 package com.tecknobit.biometrik
 
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
+import com.sun.jna.WString
+import com.tecknobit.biometrik.enums.AuthenticationResult
+import com.tecknobit.biometrik.enums.AuthenticationResult.Companion.toAuthenticationResult
 
 @Composable
 actual fun BiometrikAuthenticator(
@@ -15,4 +18,25 @@ actual fun BiometrikAuthenticator(
     onFeatureUnavailable: @Composable () -> Unit,
     onAuthenticationNotSet: @Composable () -> Unit,
 ) {
+    authenticateIfNeeded(
+        state = state,
+        onSkip = onSuccess,
+        onAuth = {
+            var result: AuthenticationResult? by remember { mutableStateOf(null) }
+            LaunchedEffect(state.authAttemptsTrigger.value) {
+                result = windowsEngine.requestAuth(
+                    reason = WString(reason)
+                ).toAuthenticationResult()
+            }
+            handleAuthenticationResult(
+                state = state,
+                authenticationResult = result,
+                onSuccess = onSuccess,
+                onFailure = onFailure,
+                onHardwareUnavailable = onHardwareUnavailable,
+                onFeatureUnavailable = onFeatureUnavailable,
+                onAuthenticationNotSet = onAuthenticationNotSet
+            )
+        }
+    )
 }

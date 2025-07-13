@@ -18,3 +18,7 @@ captures
 **/xcshareddata/WorkspaceSettings.xcsettings
 
 gradle.properties
+
+# VisualStudio
+.vs
+x64

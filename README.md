@@ -16,3 +16,12 @@ compilerOptions {
     freeCompilerArgs.add("-Xwasm-attach-js-exception")
 }
 ```
+
+## Jvm
+
+### Windows
+
+- To docu about to use the Progetto/Proprietà/C-C++/Linguaggio/Standard-LinguaggioC++ set -> Standard C++17 ISO (/std:
+  c++17)
+
+- To docu about to add the Progetto/Proprietà/Linker/Input/DipendenzeAggiuntive add -> windowsapp.lib
