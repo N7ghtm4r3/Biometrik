@@ -3,14 +3,29 @@
 #include <stdio.h>
 #include <unistd.h>
 
+typedef enum {
+
+    AUTHENTICATION_SUCCESS = 0,
+
+    AUTHENTICATION_FAILED = 1,
+
+    HARDWARE_UNAVAILABLE = 2,
+
+    AUTHENTICATION_NOT_SET = 3,
+
+    FEATURE_UNAVAILABLE = 4
+
+} AuthenticationResult;
+
 __attribute__((visibility("default")))
-int requestAuth(const wchar_t* reason) {
+AuthenticationResult requestAuth(const wchar_t* reason) {
     GError *error = NULL;
     PolkitAuthority *authority = polkit_authority_get_sync(NULL, &error);
     if (!authority) {
-        g_printerr("Errore polkit authority: %s\n", error->message);
-        g_error_free(error);
-        return -1;
+        if (error && g_error_matches(error, G_DBUS_ERROR, G_DBUS_ERROR_SERVICE_UNKNOWN))
+            return HARDWARE_UNAVAILABLE;
+        else
+            return FEATURE_UNAVAILABLE;
     }
     PolkitSubject *subject = polkit_unix_process_new(getpid());
     PolkitAuthorizationResult *result = polkit_authority_check_authorization_sync(
@@ -23,15 +38,13 @@ int requestAuth(const wchar_t* reason) {
         &error
     );
     if (!result) {
-        g_printerr("Errore autorizzazione: %s\n", error->message);
-        g_error_free(error);
         g_object_unref(subject);
         g_object_unref(authority);
-        return -1;
+        return AUTHENTICATION_NOT_SET;
     }
     int authorized = polkit_authorization_result_get_is_authorized(result);
     g_object_unref(result);
     g_object_unref(subject);
     g_object_unref(authority);
-    return authorized ? 1 : 0;
+    return authorized ? AUTHENTICATION_SUCCESS : AUTHENTICATION_FAILED;
 }
