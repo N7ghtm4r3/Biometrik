@@ -14,6 +14,7 @@ private const val NOT_PRESENT_ERROR = "NotPresentError"
 private const val INVALID_STATE_ERROR = "InvalidStateError"
 
 @Composable
+@ExperimentalComposeApi
 actual fun BiometrikAuthenticator(
     state: BiometrikState,
     appName: String,
@@ -245,30 +246,15 @@ private fun handleAuth(
             }
         }
     }
-    result?.let {
-        when (it) {
-            AUTHENTICATION_SUCCESS -> {
-                state.validAuthenticationAttempt()
-                onSuccess()
-            }
-
-            AUTHENTICATION_FAILED -> onFailure()
-            HARDWARE_UNAVAILABLE -> {
-                state.validAuthenticationAttempt()
-                onHardwareUnavailable()
-            }
-
-            FEATURE_UNAVAILABLE -> {
-                state.validAuthenticationAttempt()
-                onFeatureUnavailable()
-            }
-
-            AUTHENTICATION_NOT_SET -> {
-                state.validAuthenticationAttempt()
-                onAuthenticationNotSet()
-            }
-        }
-    }
+    handleAuthenticationResult(
+        state = state,
+        authenticationResult = result,
+        onSuccess = onSuccess,
+        onFailure = onFailure,
+        onHardwareUnavailable = onHardwareUnavailable,
+        onFeatureUnavailable = onFeatureUnavailable,
+        onAuthenticationNotSet = onAuthenticationNotSet
+    )
 }
 
 private fun obtainPublicKey(

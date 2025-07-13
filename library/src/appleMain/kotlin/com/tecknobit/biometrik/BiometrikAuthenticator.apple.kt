@@ -8,6 +8,7 @@ import platform.Foundation.NSError
 import platform.LocalAuthentication.*
 
 @Composable
+@ExperimentalComposeApi
 actual fun BiometrikAuthenticator(
     state: BiometrikState,
     appName: String,

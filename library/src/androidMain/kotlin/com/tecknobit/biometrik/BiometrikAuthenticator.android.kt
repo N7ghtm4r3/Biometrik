@@ -3,9 +3,9 @@ package com.tecknobit.biometrik
 import androidx.activity.compose.LocalActivity
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.*
-import com.tecknobit.biometrik.enums.AuthenticationResult.*
 
 @Composable
+@ExperimentalComposeApi
 actual fun BiometrikAuthenticator(
     state: BiometrikState,
     appName: String,
@@ -36,33 +36,15 @@ actual fun BiometrikAuthenticator(
             LaunchedEffect(state.authAttemptsTrigger.value) {
                 biometricPromptManager.show()
             }
-            biometricResult?.let { result ->
-                when (result) {
-                    HARDWARE_UNAVAILABLE -> {
-                        state.validAuthenticationAttempt()
-                        onHardwareUnavailable()
-                    }
-
-                    FEATURE_UNAVAILABLE -> {
-                        state.validAuthenticationAttempt()
-                        onFeatureUnavailable()
-                    }
-
-                    AUTHENTICATION_FAILED -> {
-                        onFailure()
-                    }
-
-                    AUTHENTICATION_SUCCESS -> {
-                        state.validAuthenticationAttempt()
-                        onSuccess()
-                    }
-
-                    AUTHENTICATION_NOT_SET -> {
-                        state.validAuthenticationAttempt()
-                        onAuthenticationNotSet()
-                    }
-                }
-            }
+            handleAuthenticationResult(
+                state = state,
+                authenticationResult = biometricResult,
+                onSuccess = onSuccess,
+                onFailure = onFailure,
+                onHardwareUnavailable = onHardwareUnavailable,
+                onFeatureUnavailable = onFeatureUnavailable,
+                onAuthenticationNotSet = onAuthenticationNotSet
+            )
         }
     )
 }

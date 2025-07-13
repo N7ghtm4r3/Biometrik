@@ -6,6 +6,7 @@ import com.tecknobit.biometrik.enums.AuthenticationResult
 import com.tecknobit.biometrik.enums.AuthenticationResult.Companion.toAuthenticationResult
 
 @Composable
+@ExperimentalComposeApi
 actual fun BiometrikAuthenticator(
     state: BiometrikState,
     appName: String,
@@ -22,9 +23,10 @@ actual fun BiometrikAuthenticator(
         state = state,
         onSkip = onSuccess,
         onAuth = {
+            val nativeEngine = NativeEngine.getInstance()
             var result: AuthenticationResult? by remember { mutableStateOf(null) }
             LaunchedEffect(state.authAttemptsTrigger.value) {
-                result = windowsEngine.requestAuth(
+                result = nativeEngine.requestAuth(
                     reason = WString(reason)
                 ).toAuthenticationResult()
             }

@@ -1,11 +1,12 @@
 package com.tecknobit.biometrik
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ExperimentalComposeApi
 import com.tecknobit.biometrik.enums.AuthenticationResult
 import com.tecknobit.biometrik.enums.AuthenticationResult.*
 
-
 @Composable
+@ExperimentalComposeApi
 expect fun BiometrikAuthenticator(
     state: BiometrikState = rememberBiometrikState(),
     appName: String,
