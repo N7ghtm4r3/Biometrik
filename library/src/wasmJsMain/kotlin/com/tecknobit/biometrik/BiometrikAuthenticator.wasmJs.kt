@@ -239,9 +239,11 @@ private fun handleAuth(
                 val errorString = error.toString()
                 if (errorString.startsWith(NOT_PRESENT_ERROR))
                     AUTHENTICATION_NOT_SET
-                else if (errorString.startsWith(NOT_SUPPORTED_ERROR) || errorString.startsWith(INVALID_STATE_ERROR))
+                else if (errorString.startsWith(NOT_SUPPORTED_ERROR) ||
+                    errorString.startsWith(INVALID_STATE_ERROR)
+                ) {
                     HARDWARE_UNAVAILABLE
-                else
+                } else
                     AUTHENTICATION_FAILED
             }
         }

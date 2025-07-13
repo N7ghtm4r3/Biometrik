@@ -38,7 +38,7 @@ class BiometrikState internal constructor(
         alreadyAuthenticated = true
     }
 
-    internal inline fun isAuthToSkip() = requestOnFirstOpenOnly && alreadyAuthenticated
+    internal fun isAuthToSkip() = requestOnFirstOpenOnly && alreadyAuthenticated
 
 }
 
