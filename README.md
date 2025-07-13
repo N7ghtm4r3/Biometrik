@@ -1,5 +1,6 @@
 # Biometrik
-Biometric authentication for the Compose Multiplatform applications 
+
+Biometric authentication for Compose Multiplatform applications
 
 # TODO:
 

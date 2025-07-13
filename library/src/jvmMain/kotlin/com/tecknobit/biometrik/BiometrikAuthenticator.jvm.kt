@@ -23,7 +23,7 @@ actual fun BiometrikAuthenticator(
         state = state,
         onSkip = onSuccess,
         onAuth = {
-            val nativeEngine = NativeEngine.getInstance()
+            val nativeEngine = remember { NativeEngine.getInstance() }
             var result: AuthenticationResult? by remember { mutableStateOf(null) }
             LaunchedEffect(state.authAttemptsTrigger.value) {
                 result = nativeEngine.requestAuth(

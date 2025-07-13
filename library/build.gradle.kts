@@ -19,7 +19,7 @@ plugins {
 }
 
 group = "com.teknobit.biometrik"
-version = "1.0.0"
+version = "1.0.0beta-01"
 
 kotlin {
     jvm {
@@ -136,11 +136,11 @@ mavenPublishing {
     coordinates(
         groupId = "io.github.n7ghtm4r3",
         artifactId = "Biometrik",
-        version = "1.0.0"
+        version = "1.0.0beta-01"
     )
     pom {
         name.set("Biometrik")
-        description.set("Biometric authentication for the Compose Multiplatform applications")
+        description.set("Biometric authentication for Compose Multiplatform applications")
         inceptionYear.set("2025")
         url.set("https://github.com/N7ghtm4r3/Biometrik")
 
