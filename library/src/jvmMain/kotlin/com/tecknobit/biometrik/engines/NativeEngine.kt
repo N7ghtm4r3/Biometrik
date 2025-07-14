@@ -1,4 +1,4 @@
-package com.tecknobit.biometrik
+package com.tecknobit.biometrik.engines
 
 import com.sun.jna.Library
 import com.sun.jna.WString
@@ -8,6 +8,8 @@ private const val OS_NAME_KEY = "os.name"
 
 private const val WINDOWS_OS = "Windows"
 
+private const val MACOS = "Mac OS"
+
 internal interface NativeEngine : Library {
 
     companion object {
@@ -16,6 +18,8 @@ internal interface NativeEngine : Library {
             val currentOs = System.getProperty(OS_NAME_KEY)
             return if (currentOs.startsWith(WINDOWS_OS))
                 windowsEngine
+            else if (currentOs.startsWith(MACOS))
+                macOsEngine
             else
                 linuxEngine
         }

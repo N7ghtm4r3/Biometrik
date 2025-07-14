@@ -2,6 +2,7 @@ package com.tecknobit.biometrik
 
 import androidx.compose.runtime.*
 import com.sun.jna.WString
+import com.tecknobit.biometrik.engines.NativeEngine
 import com.tecknobit.biometrik.enums.AuthenticationResult
 import com.tecknobit.biometrik.enums.AuthenticationResult.Companion.toAuthenticationResult
 
