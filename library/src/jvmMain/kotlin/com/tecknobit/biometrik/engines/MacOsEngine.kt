@@ -6,7 +6,7 @@ internal interface MacOsEngine : NativeEngine
 
 internal val macOsEngine = Native.load(
     extractDllAbsolutePath(
-        dllName = "LocalAuthentication",
+        dllName = "LocalAuthenticationEngine",
         suffix = ".dylib"
     ),
     MacOsEngine::class.java

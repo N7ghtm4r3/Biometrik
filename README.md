@@ -34,3 +34,11 @@ To docu about how to compile the linuxnative engine and that for the moment is u
 ```bash
 gcc -fPIC -shared -o LinuxPolkitEngine.so  PolkitEngine.c $(pkg-config --cflags --libs polkit-gobject-1 gio-2.0 glib-2.0)
 ```
+
+### MacOs 
+
+To docu about for the jvm running on mac the command to build the shared lib is the following:
+
+```bash
+clang -framework Foundation -framework LocalAuthentication -shared -o LocalAuthenticationEngine.dylib LocalAuthenticationEngine.m
+```
