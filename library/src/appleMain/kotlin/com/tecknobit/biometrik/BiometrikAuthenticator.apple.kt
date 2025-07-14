@@ -14,7 +14,6 @@ actual fun BiometrikAuthenticator(
     appName: String,
     title: String,
     reason: String,
-    requestOnFirstOpenOnly: Boolean,
     onSuccess: @Composable () -> Unit,
     onFailure: @Composable () -> Unit,
     onHardwareUnavailable: @Composable () -> Unit,
@@ -55,6 +54,7 @@ actual fun BiometrikAuthenticator(
 }
 
 @Composable
+@ExperimentalComposeApi
 private fun authEvaluated(
     state: BiometrikState,
     context: LAContext,
@@ -90,6 +90,7 @@ private fun authEvaluated(
 }
 
 @Composable
+@ExperimentalComposeApi
 private fun authNotEvaluated(
     state: BiometrikState,
     errorPointer: ObjCObjectVar<NSError?>,

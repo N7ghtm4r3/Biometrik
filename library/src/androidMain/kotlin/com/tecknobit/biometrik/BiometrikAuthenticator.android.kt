@@ -11,7 +11,6 @@ actual fun BiometrikAuthenticator(
     appName: String,
     title: String,
     reason: String,
-    requestOnFirstOpenOnly: Boolean,
     onSuccess: @Composable () -> Unit,
     onFailure: @Composable () -> Unit,
     onHardwareUnavailable: @Composable () -> Unit,

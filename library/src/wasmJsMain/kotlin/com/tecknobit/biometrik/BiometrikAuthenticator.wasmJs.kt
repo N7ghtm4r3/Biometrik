@@ -20,7 +20,6 @@ actual fun BiometrikAuthenticator(
     appName: String,
     title: String,
     reason: String,
-    requestOnFirstOpenOnly: Boolean,
     onSuccess: @Composable () -> Unit,
     onFailure: @Composable () -> Unit,
     onHardwareUnavailable: @Composable () -> Unit,
@@ -62,6 +61,7 @@ actual fun BiometrikAuthenticator(
 }
 
 @Composable
+@ExperimentalComposeApi
 private fun performBioAuth(
     state: BiometrikState,
     appName: String,
@@ -122,6 +122,7 @@ private fun loadChallenge(
 private fun credentialsNavigator(): CredentialsNavigator = js("window.navigator.credentials")
 
 @Composable
+@ExperimentalComposeApi
 private fun registerNewKeyAndAuth(
     state: BiometrikState,
     challenge: Uint8Array,
@@ -188,6 +189,7 @@ private fun createPublicKey(
 )
 
 @Composable
+@ExperimentalComposeApi
 private fun retrieveExistingKeyAndAuth(
     state: BiometrikState,
     challenge: Uint8Array,
@@ -217,6 +219,7 @@ private fun retrieveExistingKeyAndAuth(
 }
 
 @Composable
+@ExperimentalComposeApi
 private fun handleAuth(
     state: BiometrikState,
     authRoutine: suspend () -> Unit,

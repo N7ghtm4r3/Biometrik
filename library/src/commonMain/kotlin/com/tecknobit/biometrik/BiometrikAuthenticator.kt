@@ -12,7 +12,6 @@ expect fun BiometrikAuthenticator(
     appName: String,
     title: String,
     reason: String,
-    requestOnFirstOpenOnly: Boolean = true,
     onSuccess: @Composable () -> Unit,
     onFailure: @Composable () -> Unit,
     onHardwareUnavailable: @Composable () -> Unit = onSuccess,
@@ -21,6 +20,7 @@ expect fun BiometrikAuthenticator(
 )
 
 @Composable
+@ExperimentalComposeApi
 internal fun authenticateIfNeeded(
     state: BiometrikState,
     onSkip: @Composable () -> Unit,
@@ -33,6 +33,7 @@ internal fun authenticateIfNeeded(
 }
 
 @Composable
+@ExperimentalComposeApi
 internal fun handleAuthenticationResult(
     state: BiometrikState,
     authenticationResult: AuthenticationResult?,
