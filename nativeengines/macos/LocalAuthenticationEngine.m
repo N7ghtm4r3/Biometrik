@@ -2,11 +2,11 @@
 #import <LocalAuthentication/LocalAuthentication.h>
 
 typedef NS_ENUM(NSInteger, AuthenticationResult) {
-    AuthenticationSuccess              = 0,
-    AuthenticationFailed               = 1,
-    HardwareUnavailable  = 2,
-    AuthenticationNotSet               = 3,
-    FeatureUnavailable   = 4
+    HardwareUnavailable = 2,
+    FeatureUnavailable = 4,
+    AuthenticationFailed = 1,
+    AuthenticationSuccess = 0,
+    AuthenticationNotSet = 3
 };
 
 AuthenticationResult requestAuth(NSString *reason) {
