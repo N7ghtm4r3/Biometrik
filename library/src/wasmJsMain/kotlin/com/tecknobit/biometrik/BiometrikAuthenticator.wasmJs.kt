@@ -13,6 +13,26 @@ private const val NOT_PRESENT_ERROR = "NotPresentError"
 
 private const val INVALID_STATE_ERROR = "InvalidStateError"
 
+/**
+ * Component used to perform the bio-authentication to authorize the user.
+ *
+ * It under the hood uses the [WebAuthn](https://developer.mozilla.org/en-US/docs/Web/API/Web_Authentication_API) APIs
+ *
+ * @param state The state used to manage the lifecycle of the component
+ * @param appName The name of the application where the authentication has been requested
+ * @param reason The reason why it is requested the authentication
+ * @param onSuccess The callback to invoke when the authentication was successful
+ * @param onFailure The callback to invoke when the authentication was failed
+ * @param onHardwareUnavailable The fallback to invoke when the device has not the required hardware to perform
+ * a bio-authentication or cannot currently serve the request. By default, is not considered an authentication error so
+ * will be invoked [onSuccess] if it has been not customized
+ * @param onFeatureUnavailable The fallback to invoke when the feature of the bio-authentication is not provided
+ * by the device, or it has been disabled following internal policies. By default, is not considered an authentication error
+ * so will be invoked [onSuccess] if it has been not customized
+ * @param onAuthenticationNotSet The fallback to invoke when the authentication is not actually set by the user,
+ * so cannot be performed any type of authentication. By default, is not considered an authentication error
+ * so will be invoked [onSuccess] if it has been not customized
+ */
 @Composable
 @ExperimentalComposeApi
 actual fun BiometrikAuthenticator(

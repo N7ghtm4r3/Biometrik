@@ -18,8 +18,8 @@ enum class AuthenticationResult(
     HARDWARE_UNAVAILABLE(2),
 
     /**
-     * `FEATURE_UNAVAILABLE` this status indicates the feature of the bio-authentication is not provided by the device or
-     * it has been disabled following internal policies
+     * `FEATURE_UNAVAILABLE` this status indicates the feature of the bio-authentication is not provided by the device,
+     * or it has been disabled following internal policies
      */
     FEATURE_UNAVAILABLE(4),
 
