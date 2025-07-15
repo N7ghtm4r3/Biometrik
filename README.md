@@ -85,6 +85,7 @@ sourceSets {
     ...
     implementation("androidx.appcompat:appcompat:1.7.1")
   }
+
 }
 ```
 
@@ -116,17 +117,16 @@ The latest step is to change the theme of the `MainActivity` from the `AndroidMa
     <activity
             android:exported="true"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
-    // e.g. this theme
-    android:name=".MainActivity">
-    <intent-filter>
-      <action android:name="android.intent.action.MAIN"/>
+            android:name=".MainActivity">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN"/>
 
-      <category android:name="android.intent.category.LAUNCHER"/>
-    </intent-filter>
-  </activity>
-</application>
+        <category android:name="android.intent.category.LAUNCHER"/>
+      </intent-filter>
+    </activity>
+  </application>
 
-        </manifest>
+</manifest>
 ```
 
 In the example, the `@style/Theme.AppCompat.DayNight.NoActionBar` style has been used, but you can implement any theme
@@ -230,8 +230,7 @@ The requirements are:
 
 ### Linux
 
-At the moment on the Linux's target it is supported the authentication via **Polkit**, but in the future releases will
-be tried to implement also the biometric authentication as well.
+Currently, authentication on Linux is supported via **Polkit**. Biometric support may be considered in future releases.
 
 To modify the native engine you can find its file on:
 
@@ -241,7 +240,7 @@ nativeengines
     └── PolkitEngine.c
 ```
 
-After applied the modifications you needed, you can compile it with the below command:
+After applied the modification you needed, you can compile it with the below command:
 
 ```bash
 gcc -fPIC -shared -o LinuxPolkitEngine.so  PolkitEngine.c $(pkg-config --cflags --libs polkit-gobject-1 gio-2.0 glib-2.0)
@@ -249,12 +248,23 @@ gcc -fPIC -shared -o LinuxPolkitEngine.so  PolkitEngine.c $(pkg-config --cflags 
 
 ### MacOs
 
-### JVM
+To modify the native engine you can find its file on:
 
-On the `JVM` target if you need to change anything from the native engines, after applied the changes on the native
-engine
-code, you can run these following commands to compile the **dynamic linked libraries** and obtain the file to place into
-the `resources` folder:
+``` bash
+nativeengines
+├── macos
+    └── LocalAuthenticationEngine.m
+```
+
+After applied the modification you needed, you can compile it with the below command:
+
+```bash
+clang -framework Foundation -framework LocalAuthentication -shared -o LocalAuthenticationEngine.dylib LocalAuthenticationEngine.m
+```
+
+### Place the dynamic libraries
+
+Once compiled, place the dynamic libraries in the appropriate platform-specific directories
 
 ``` bash
 resources
@@ -290,22 +300,3 @@ If you want support project and developer
 with <a href="https://www.paypal.com/donate/?hosted_button_id=5QMN5UQH7LDT4">PayPal</a>
 
 Copyright © 2025 Tecknobit
-
-# Biometrik
-
-
-# TODO:
-
-## Jvm
-
-### Linux
-
-To docu about how to compile the linuxnative engine and that for the moment is used without bioauth
-
-### MacOs 
-
-To docu about for the jvm running on mac the command to build the shared lib is the following:
-
-```bash
-clang -framework Foundation -framework LocalAuthentication -shared -o LocalAuthenticationEngine.dylib LocalAuthenticationEngine.m
-```
