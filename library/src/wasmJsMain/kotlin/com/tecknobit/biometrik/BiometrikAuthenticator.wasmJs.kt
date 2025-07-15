@@ -7,10 +7,19 @@ import com.tecknobit.kmprefs.KMPrefs
 import kotlinx.coroutines.await
 import org.khronos.webgl.Uint8Array
 
+/**
+ * `NOT_SUPPORTED_ERROR` constant for the `NotSupportedError` value
+ */
 private const val NOT_SUPPORTED_ERROR = "NotSupportedError"
 
+/**
+ * `NOT_PRESENT_ERROR` constant for the `NotPresentError` value
+ */
 private const val NOT_PRESENT_ERROR = "NotPresentError"
 
+/**
+ * `INVALID_STATE_ERROR` constant for the `InvalidStateError` value
+ */
 private const val INVALID_STATE_ERROR = "InvalidStateError"
 
 /**
@@ -80,6 +89,23 @@ actual fun BiometrikAuthenticator(
     )
 }
 
+/**
+ * Functional method used to perform the bio-authentication
+ *
+ * @param state The state used to manage the lifecycle of the component
+ * @param appName The name of the application where the authentication has been requested
+ * @param onSuccess The callback to invoke when the authentication was successful
+ * @param onFailure The callback to invoke when the authentication was failed
+ * @param onHardwareUnavailable The fallback to invoke when the device has not the required hardware to perform
+ * a bio-authentication or cannot currently serve the request. By default, is not considered an authentication error so
+ * will be invoked [onSuccess] if it has been not customized
+ * @param onFeatureUnavailable The fallback to invoke when the feature of the bio-authentication is not provided
+ * by the device, or it has been disabled following internal policies. By default, is not considered an authentication error
+ * so will be invoked [onSuccess] if it has been not customized
+ * @param onAuthenticationNotSet The fallback to invoke when the authentication is not actually set by the user,
+ * so cannot be performed any type of authentication. By default, is not considered an authentication error
+ * so will be invoked [onSuccess] if it has been not customized
+ */
 @Composable
 @ExperimentalComposeApi
 private fun performBioAuth(
@@ -129,6 +155,11 @@ private fun performBioAuth(
     }
 }
 
+/**
+ * Method used to random load the [challenge] array
+ *
+ * @param challenge The array to load
+ */
 private fun loadChallenge(
     challenge: Uint8Array,
 ): Unit = js(
@@ -139,8 +170,33 @@ private fun loadChallenge(
     """
 )
 
+/**
+ * Method used to create an instance of the [CredentialsNavigator] from native code
+ *
+ * @return the credentials navigator as [CredentialsNavigator]
+ */
 private fun credentialsNavigator(): CredentialsNavigator = js("window.navigator.credentials")
 
+/**
+ * Functional method used to register a new key and then authenticate
+ *
+ * @param state The state used to manage the lifecycle of the component
+ * @param challenge The challenge used to create the key
+ * @param appName The name of the application where the authentication has been requested
+ * @param credentialsNavigator The credentials navigator instance
+ * @param localStorage The instance used to locally store the data related to the key
+ * @param onSuccess The callback to invoke when the authentication was successful
+ * @param onFailure The callback to invoke when the authentication was failed
+ * @param onHardwareUnavailable The fallback to invoke when the device has not the required hardware to perform
+ * a bio-authentication or cannot currently serve the request. By default, is not considered an authentication error so
+ * will be invoked [onSuccess] if it has been not customized
+ * @param onFeatureUnavailable The fallback to invoke when the feature of the bio-authentication is not provided
+ * by the device, or it has been disabled following internal policies. By default, is not considered an authentication error
+ * so will be invoked [onSuccess] if it has been not customized
+ * @param onAuthenticationNotSet The fallback to invoke when the authentication is not actually set by the user,
+ * so cannot be performed any type of authentication. By default, is not considered an authentication error
+ * so will be invoked [onSuccess] if it has been not customized
+ */
 @Composable
 @ExperimentalComposeApi
 private fun registerNewKeyAndAuth(
@@ -181,6 +237,15 @@ private fun registerNewKeyAndAuth(
     )
 }
 
+/**
+ * Method used to create a public key
+ *
+ * @param challenge The challenge to create the key
+ * @param appName The name of the application where the authentication has been requested
+ * @param appId The identifier of the application
+ *
+ * @return the key as [JsAny]
+ */
 private fun createPublicKey(
     challenge: Uint8Array,
     appName: String,
@@ -208,6 +273,24 @@ private fun createPublicKey(
     """
 )
 
+/**
+ * Functional method used to retrieve an existing key and then perform the bio-authentication
+ *
+ * @param state The state used to manage the lifecycle of the component
+ * @param challenge The challenge used to create the key
+ * @param credentialsNavigator The credentials navigator instance
+ * @param onSuccess The callback to invoke when the authentication was successful
+ * @param onFailure The callback to invoke when the authentication was failed
+ * @param onHardwareUnavailable The fallback to invoke when the device has not the required hardware to perform
+ * a bio-authentication or cannot currently serve the request. By default, is not considered an authentication error so
+ * will be invoked [onSuccess] if it has been not customized
+ * @param onFeatureUnavailable The fallback to invoke when the feature of the bio-authentication is not provided
+ * by the device, or it has been disabled following internal policies. By default, is not considered an authentication error
+ * so will be invoked [onSuccess] if it has been not customized
+ * @param onAuthenticationNotSet The fallback to invoke when the authentication is not actually set by the user,
+ * so cannot be performed any type of authentication. By default, is not considered an authentication error
+ * so will be invoked [onSuccess] if it has been not customized
+ */
 @Composable
 @ExperimentalComposeApi
 private fun retrieveExistingKeyAndAuth(
@@ -238,6 +321,44 @@ private fun retrieveExistingKeyAndAuth(
     )
 }
 
+/**
+ * Method used to obtain a public key
+ *
+ * @param challenge The challenge to attach to the key
+ *
+ * @return the key as [JsAny]
+ */
+private fun obtainPublicKey(
+    challenge: Uint8Array,
+): JsAny = js(
+    """
+    ({
+        publicKey: {
+            challenge: challenge,
+            timeout: 60000,
+            userVerification: 'required'
+        }
+    })
+    """
+)
+
+/**
+ * Functional method used to handle the authentication routines
+ *
+ * @param state The state used to manage the lifecycle of the component
+ * @param authRoutine The routine to perform to authenticate
+ * @param onSuccess The callback to invoke when the authentication was successful
+ * @param onFailure The callback to invoke when the authentication was failed
+ * @param onHardwareUnavailable The fallback to invoke when the device has not the required hardware to perform
+ * a bio-authentication or cannot currently serve the request. By default, is not considered an authentication error so
+ * will be invoked [onSuccess] if it has been not customized
+ * @param onFeatureUnavailable The fallback to invoke when the feature of the bio-authentication is not provided
+ * by the device, or it has been disabled following internal policies. By default, is not considered an authentication error
+ * so will be invoked [onSuccess] if it has been not customized
+ * @param onAuthenticationNotSet The fallback to invoke when the authentication is not actually set by the user,
+ * so cannot be performed any type of authentication. By default, is not considered an authentication error
+ * so will be invoked [onSuccess] if it has been not customized
+ */
 @Composable
 @ExperimentalComposeApi
 private fun handleAuth(
@@ -281,17 +402,3 @@ private fun handleAuth(
         onAuthenticationNotSet = onAuthenticationNotSet
     )
 }
-
-private fun obtainPublicKey(
-    challenge: Uint8Array,
-): JsAny = js(
-    """
-    ({
-        publicKey: {
-            challenge: challenge,
-            timeout: 60000,
-            userVerification: 'required'
-        }
-    })
-    """
-)
