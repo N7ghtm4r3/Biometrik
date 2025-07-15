@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>com.tecknobit.biometrik.engines</title>
+    <link href="../../images/logo-icon.svg" rel="icon" type="image/svg">
+    <script>var pathToRoot = "../../";</script>
+    <script>document.documentElement.classList.replace("no-js","js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+    if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    } else {
+        const savedDarkMode = JSON.parse(storage)
+        if(savedDarkMode === true) {
+            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+    }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async="async"></script>
+<link href="../../styles/style.css" rel="Stylesheet">
+<link href="../../styles/main.css" rel="Stylesheet">
+<link href="../../styles/prism.css" rel="Stylesheet">
+<link href="../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../styles/font-jb-sans-auto.css" rel="Stylesheet">
+<link href="../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../scripts/clipboard.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="../../scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="../../scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="../../ui-kit/ui-kit.min.js" defer="defer"></script>
+<script type="text/javascript" src="../../scripts/symbol-parameters-wrapper_deferred.js" defer="defer"></script>
+</head>
+<body>
+    <div class="root">
+    <nav class="navigation theme-dark" id="navigation-wrapper">
+            <a class="library-name--link" href="../../index.html">
+                    Biometrik
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+1.0.0beta-01        </div>
+        <div class="navigation-controls">
+        <div class="filter-section filter-section_loading" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active=""
+                        data-filter=":library:dokkaHtml/jvmMain">jvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox"
+                        data-role="dropdown-toggle"
+                        aria-controls="platform-tags-listbox"
+                        aria-haspopup="listbox"
+                        aria-expanded="false"
+                        aria-label="Toggle source sets"
+                ></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox">
+                    <div class="dropdown--header"><span>Platform filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close platform filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":library:dokkaHtml/jvmMain"
+                                       data-filter=":library:dokkaHtml/jvmMain"/>
+                                <span class="checkbox--icon"></span>
+                                jvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </div>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </nav>
+        <div id="container">
+            <div class="sidebar" id="leftColumn">
+                <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                    <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                        data-role="dropdown-listbox">
+                        <div class="dropdown--header">
+                            <span>
+                                    Biometrik
+                            </span>
+                            <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                            </button>
+                        </div>
+                        <div class="sidebar--inner" id="sideMenu"></div>
+                    </ul>
+                    <div class="dropdown--overlay"></div>
+                </div>
+            </div>
+            <div id="main">
+<div class="main-content" data-page-type="package" id="content" pageIds="Biometrik::com.tecknobit.biometrik.engines////PointingToDeclaration//-1947558149">
+  <div class="breadcrumbs"><a href="../../index.html">Biometrik</a><span class="delimiter">/</span><span class="current">com.tecknobit.biometrik.engines</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="TYPE">Types</button><button class="section-tab" data-togglable="FUNCTION,EXTENSION_FUNCTION">Functions</button><button class="section-tab" data-togglable="PROPERTY,EXTENSION_PROPERTY">Properties</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="TYPE">
+        <h2 class="">Types</h2>
+        <div class="table"><a data-name="-105736081%2FClasslikes%2F-1947558149" anchor-label="LinuxEngine" id="-105736081%2FClasslikes%2F-1947558149" data-filterable-set=":library:dokkaHtml/jvmMain"></a>
+          <div class="table-row" data-filterable-current=":library:dokkaHtml/jvmMain" data-filterable-set=":library:dokkaHtml/jvmMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-linux-engine/index.html"><span>Linux</span><wbr></wbr><span><span>Engine</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-105736081%2FClasslikes%2F-1947558149"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":library:dokkaHtml/jvmMain" data-filterable-set=":library:dokkaHtml/jvmMain" data-active="" data-toggle=":library:dokkaHtml/jvmMain">jvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":library:dokkaHtml/jvmMain"><div class="symbol monospace"><span class="token keyword">internal </span><span class="token keyword">interface </span><a href="-linux-engine/index.html">LinuxEngine</a> : <a href="-native-engine/index.html">NativeEngine</a></div><div class="brief "><p class="paragraph">The <code class="lang-kotlin">LinuxEngine</code> interface allow to access to the native API to request the bio-authentication using the uses the <a href="https://www.freedesktop.org/software/polkit/docs/latest/index.html">Polkit</a> APIs</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1071070704%2FClasslikes%2F-1947558149" anchor-label="MacOsEngine" id="1071070704%2FClasslikes%2F-1947558149" data-filterable-set=":library:dokkaHtml/jvmMain"></a>
+          <div class="table-row" data-filterable-current=":library:dokkaHtml/jvmMain" data-filterable-set=":library:dokkaHtml/jvmMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-mac-os-engine/index.html"><span>Mac</span><wbr></wbr><span>Os</span><wbr></wbr><span><span>Engine</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1071070704%2FClasslikes%2F-1947558149"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":library:dokkaHtml/jvmMain" data-filterable-set=":library:dokkaHtml/jvmMain" data-active="" data-toggle=":library:dokkaHtml/jvmMain">jvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":library:dokkaHtml/jvmMain"><div class="symbol monospace"><span class="token keyword">internal </span><span class="token keyword">interface </span><a href="-mac-os-engine/index.html">MacOsEngine</a> : <a href="-native-engine/index.html">NativeEngine</a></div><div class="brief "><p class="paragraph">The <code class="lang-kotlin">MacOsEngine</code> interface allow to access to the native API to request the bio-authentication using the <a href="https://developer.apple.com/documentation/localauthentication">local authentication</a> APIs</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-507305020%2FClasslikes%2F-1947558149" anchor-label="NativeEngine" id="-507305020%2FClasslikes%2F-1947558149" data-filterable-set=":library:dokkaHtml/jvmMain"></a>
+          <div class="table-row" data-filterable-current=":library:dokkaHtml/jvmMain" data-filterable-set=":library:dokkaHtml/jvmMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-native-engine/index.html"><span>Native</span><wbr></wbr><span><span>Engine</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-507305020%2FClasslikes%2F-1947558149"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":library:dokkaHtml/jvmMain" data-filterable-set=":library:dokkaHtml/jvmMain" data-active="" data-toggle=":library:dokkaHtml/jvmMain">jvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":library:dokkaHtml/jvmMain"><div class="symbol monospace"><span class="token keyword">internal </span><span class="token keyword">interface </span><a href="-native-engine/index.html">NativeEngine</a> : <span data-unresolved-link="com.sun.jna/Library///PointingToDeclaration/">Library</span></div><div class="brief "><p class="paragraph">The <code class="lang-kotlin">NativeEngine</code> interface allow to access to the native engines of each operating system using the <a href="https://github.com/java-native-access/jna">JNA</a> APIs</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-739921920%2FClasslikes%2F-1947558149" anchor-label="WindowsEngine" id="-739921920%2FClasslikes%2F-1947558149" data-filterable-set=":library:dokkaHtml/jvmMain"></a>
+          <div class="table-row" data-filterable-current=":library:dokkaHtml/jvmMain" data-filterable-set=":library:dokkaHtml/jvmMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-windows-engine/index.html"><span>Windows</span><wbr></wbr><span><span>Engine</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-739921920%2FClasslikes%2F-1947558149"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":library:dokkaHtml/jvmMain" data-filterable-set=":library:dokkaHtml/jvmMain" data-active="" data-toggle=":library:dokkaHtml/jvmMain">jvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":library:dokkaHtml/jvmMain"><div class="symbol monospace"><span class="token keyword">internal </span><span class="token keyword">interface </span><a href="-windows-engine/index.html">WindowsEngine</a> : <a href="-native-engine/index.html">NativeEngine</a></div><div class="brief "><p class="paragraph">The <code class="lang-kotlin">WindowsEngine</code> interface allow to access to the native API to request the bio-authentication using the <a href="https://learn.microsoft.com/en-us/windows/apps/develop/security/windows-hello">Windows Hello</a> APIs</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="">Properties</h2>
+        <div class="table"><a data-name="320919970%2FProperties%2F-1947558149" anchor-label="linuxEngine" id="320919970%2FProperties%2F-1947558149" data-filterable-set=":library:dokkaHtml/jvmMain"></a>
+          <div class="table-row" data-filterable-current=":library:dokkaHtml/jvmMain" data-filterable-set=":library:dokkaHtml/jvmMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="linux-engine.html"><span>linux</span><wbr></wbr><span><span>Engine</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="320919970%2FProperties%2F-1947558149"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":library:dokkaHtml/jvmMain" data-filterable-set=":library:dokkaHtml/jvmMain" data-active="" data-toggle=":library:dokkaHtml/jvmMain">jvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":library:dokkaHtml/jvmMain"><div class="symbol monospace"><span class="token keyword">internal </span><span class="token keyword">val </span><a href="linux-engine.html">linuxEngine</a><span class="token operator">: </span><span data-unresolved-link="/&amp;lt;Error class: unknown class&amp;gt;///PointingToDeclaration/">&lt;Error class: unknown class&gt;</span></div><div class="brief "><p class="paragraph"><code class="lang-kotlin">linuxEngine</code> instance of the <a href="-linux-engine/index.html">LinuxEngine</a> engine</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="941671813%2FProperties%2F-1947558149" anchor-label="MACOS" id="941671813%2FProperties%2F-1947558149" data-filterable-set=":library:dokkaHtml/jvmMain"></a>
+          <div class="table-row" data-filterable-current=":library:dokkaHtml/jvmMain" data-filterable-set=":library:dokkaHtml/jvmMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-m-a-c-o-s.html"><span><span>MACOS</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="941671813%2FProperties%2F-1947558149"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":library:dokkaHtml/jvmMain" data-filterable-set=":library:dokkaHtml/jvmMain" data-active="" data-toggle=":library:dokkaHtml/jvmMain">jvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":library:dokkaHtml/jvmMain"><div class="symbol monospace"><span class="token keyword">private </span><span class="token keyword">const </span><span class="token keyword">val </span><a href="-m-a-c-o-s.html">MACOS</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph"><code class="lang-kotlin">MACOS</code> the constant for the <code class="lang-kotlin">Mac OS</code> value</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1497726755%2FProperties%2F-1947558149" anchor-label="macOsEngine" id="1497726755%2FProperties%2F-1947558149" data-filterable-set=":library:dokkaHtml/jvmMain"></a>
+          <div class="table-row" data-filterable-current=":library:dokkaHtml/jvmMain" data-filterable-set=":library:dokkaHtml/jvmMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="mac-os-engine.html"><span>mac</span><wbr></wbr><span>Os</span><wbr></wbr><span><span>Engine</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1497726755%2FProperties%2F-1947558149"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":library:dokkaHtml/jvmMain" data-filterable-set=":library:dokkaHtml/jvmMain" data-active="" data-toggle=":library:dokkaHtml/jvmMain">jvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":library:dokkaHtml/jvmMain"><div class="symbol monospace"><span class="token keyword">internal </span><span class="token keyword">val </span><a href="mac-os-engine.html">macOsEngine</a><span class="token operator">: </span><span data-unresolved-link="/&amp;lt;Error class: unknown class&amp;gt;///PointingToDeclaration/">&lt;Error class: unknown class&gt;</span></div><div class="brief "><p class="paragraph"><code class="lang-kotlin">macOsEngine</code> instance of the <a href="-mac-os-engine/index.html">MacOsEngine</a> engine</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-759934606%2FProperties%2F-1947558149" anchor-label="OS_NAME_KEY" id="-759934606%2FProperties%2F-1947558149" data-filterable-set=":library:dokkaHtml/jvmMain"></a>
+          <div class="table-row" data-filterable-current=":library:dokkaHtml/jvmMain" data-filterable-set=":library:dokkaHtml/jvmMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-o-s_-n-a-m-e_-k-e-y.html"><span>OS_</span><wbr></wbr><span>NAME_</span><wbr></wbr><span>KEY</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-759934606%2FProperties%2F-1947558149"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":library:dokkaHtml/jvmMain" data-filterable-set=":library:dokkaHtml/jvmMain" data-active="" data-toggle=":library:dokkaHtml/jvmMain">jvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":library:dokkaHtml/jvmMain"><div class="symbol monospace"><span class="token keyword">private </span><span class="token keyword">const </span><span class="token keyword">val </span><a href="-o-s_-n-a-m-e_-k-e-y.html">OS_NAME_KEY</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph"><code class="lang-kotlin">OS_NAME_KEY</code> the constant for the <code class="lang-kotlin">os.name</code> property</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="621442466%2FProperties%2F-1947558149" anchor-label="WINDOWS_OS" id="621442466%2FProperties%2F-1947558149" data-filterable-set=":library:dokkaHtml/jvmMain"></a>
+          <div class="table-row" data-filterable-current=":library:dokkaHtml/jvmMain" data-filterable-set=":library:dokkaHtml/jvmMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-w-i-n-d-o-w-s_-o-s.html"><span>WINDOWS_</span><wbr></wbr><span>OS</span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="621442466%2FProperties%2F-1947558149"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":library:dokkaHtml/jvmMain" data-filterable-set=":library:dokkaHtml/jvmMain" data-active="" data-toggle=":library:dokkaHtml/jvmMain">jvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":library:dokkaHtml/jvmMain"><div class="symbol monospace"><span class="token keyword">private </span><span class="token keyword">const </span><span class="token keyword">val </span><a href="-w-i-n-d-o-w-s_-o-s.html">WINDOWS_OS</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph"><code class="lang-kotlin">WINDOWS_OS</code> the constant for the <code class="lang-kotlin">Windows</code> value</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1863998605%2FProperties%2F-1947558149" anchor-label="windowsEngine" id="-1863998605%2FProperties%2F-1947558149" data-filterable-set=":library:dokkaHtml/jvmMain"></a>
+          <div class="table-row" data-filterable-current=":library:dokkaHtml/jvmMain" data-filterable-set=":library:dokkaHtml/jvmMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="windows-engine.html"><span>windows</span><wbr></wbr><span><span>Engine</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1863998605%2FProperties%2F-1947558149"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":library:dokkaHtml/jvmMain" data-filterable-set=":library:dokkaHtml/jvmMain" data-active="" data-toggle=":library:dokkaHtml/jvmMain">jvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":library:dokkaHtml/jvmMain"><div class="symbol monospace"><span class="token keyword">internal </span><span class="token keyword">val </span><a href="windows-engine.html">windowsEngine</a><span class="token operator">: </span><span data-unresolved-link="/&amp;lt;Error class: unknown class&amp;gt;///PointingToDeclaration/">&lt;Error class: unknown class&gt;</span></div><div class="brief "><p class="paragraph"><code class="lang-kotlin">windowsEngine</code> instance of the <a href="-windows-engine/index.html">WindowsEngine</a> engine</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="">Functions</h2>
+        <div class="table"><a data-name="-900039866%2FFunctions%2F-1947558149" anchor-label="extractDllAbsolutePath" id="-900039866%2FFunctions%2F-1947558149" data-filterable-set=":library:dokkaHtml/jvmMain"></a>
+          <div class="table-row" data-filterable-current=":library:dokkaHtml/jvmMain" data-filterable-set=":library:dokkaHtml/jvmMain">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="extract-dll-absolute-path.html"><span>extract</span><wbr></wbr><span>Dll</span><wbr></wbr><span>Absolute</span><wbr></wbr><span><span>Path</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-900039866%2FFunctions%2F-1947558149"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
+                    <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":library:dokkaHtml/jvmMain" data-filterable-set=":library:dokkaHtml/jvmMain" data-active="" data-toggle=":library:dokkaHtml/jvmMain">jvm</button></div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":library:dokkaHtml/jvmMain"><div class="symbol monospace"><span class="token keyword">internal </span><span class="token keyword">fun </span><a href="extract-dll-absolute-path.html"><span class="token function">extractDllAbsolutePath</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">dllName<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">suffix<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Method used to extract the absolute path of the dll to execute to perform the native bio-authentication.</p></div></div>                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+        <span>(c) 2025 Tecknobit</span>
+        <span class="pull-right">
+            <span>Generated by </span>
+            <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                <span>dokka</span>
+            </a>
+        </span>
+    </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
