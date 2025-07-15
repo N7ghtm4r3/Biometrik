@@ -140,7 +140,10 @@ mavenPublishing {
     )
     pom {
         name.set("Biometrik")
-        description.set("Biometric authentication for Compose Multiplatform applications")
+        description.set(
+            "Biometrik allows to perform the bio-authentication on Compose Multiplatform applications leveraging" +
+                    " the native APIs provided by each platform"
+        )
         inceptionYear.set("2025")
         url.set("https://github.com/N7ghtm4r3/Biometrik")
 
