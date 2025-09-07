@@ -30,6 +30,11 @@
 extern "C" {
 
     /**
+     * Constant value represents the maximum allowed attempts to force the biometric prompt on top
+     */
+    static const int FORCE_PROMPT_ON_TOP_MAX_ATTEMPTS = 20;
+
+    /**
      * @enum AuthenticationResult
      * @brief Represents the detectable statuses handled by the component
      *
@@ -78,4 +83,10 @@ extern "C" {
      * @return An @ref AuthenticationResult indicating the result of the authentication request
      */
     DLL_API AuthenticationResult requestAuth(const wchar_t* reason);
+
+    /**
+     * @brief Tries to force the Windows Hello prompt on top following the https://github.com/bitwarden/clients/issues/5287#issuecomment-3174288892 
+     * workaround. This workaround not always works due Windows's strict security reasons
+     */
+    DLL_API void ForcePromptOnTop();
 }
