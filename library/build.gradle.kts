@@ -1,7 +1,6 @@
 
 import com.vanniktech.maven.publish.JavadocJar
 import com.vanniktech.maven.publish.KotlinMultiplatform
-import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.dokka.DokkaConfiguration.Visibility.*
 import org.jetbrains.dokka.base.DokkaBase
 import org.jetbrains.dokka.base.DokkaBaseConfiguration
@@ -13,13 +12,12 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
-    alias(libs.plugins.composeHotReload)
     alias(libs.plugins.vanniktech.mavenPublish)
     alias(libs.plugins.dokka)
 }
 
 group = "com.teknobit.biometrik"
-version = "1.0.0beta-01"
+version = "1.0.0"
 
 kotlin {
     jvm {
@@ -136,7 +134,7 @@ mavenPublishing {
     coordinates(
         groupId = "io.github.n7ghtm4r3",
         artifactId = "Biometrik",
-        version = "1.0.0beta-01"
+        version = "1.0.0"
     )
     pom {
         name.set("Biometrik")
@@ -165,7 +163,7 @@ mavenPublishing {
             url.set("https://github.com/N7ghtm4r3/Biometrik")
         }
     }
-    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+    publishToMavenCentral()
     signAllPublications()
 }
 
