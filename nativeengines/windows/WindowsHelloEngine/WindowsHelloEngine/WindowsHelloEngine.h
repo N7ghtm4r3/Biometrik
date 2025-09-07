@@ -32,7 +32,7 @@ extern "C" {
     /**
      * Constant value represents the maximum allowed attempts to force the biometric prompt on top
      */
-    static const int FORCE_PROMPT_ON_TOP_MAX_ATTEMPTS = 20;
+    static const int FORCE_PROMPT_ON_TOP_MAX_ATTEMPTS = 15;
 
     /**
      * @enum AuthenticationResult
