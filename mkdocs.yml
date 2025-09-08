@@ -63,7 +63,7 @@ nav:
   - Overview: index.md
   - Setup: setup.md
   - Usage: usage.md
-  - JVM fine-tuning: jvm_fine-tuning.md
+  - Native engines: native_engines.md
 
 extra:
   social:

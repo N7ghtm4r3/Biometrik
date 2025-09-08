@@ -211,20 +211,19 @@ BiometrikAuthenticator(
 )
 ```
 
-## Native Fine-Tuning for JVM Platform
+## Native engines
 
 > [!WARNING]
 > Any pull requests containing dynamic library output files will be rejected for security reasons.  
 > If there are changes to the native engines, please edit the source code and create the pull request
 > **without** including the output files. The maintainers will handle the compilation
 
-If you need to fine-tune native engines, follow the steps below depending on which engine you need to modify:
+If you need to apply changes to the native engines, follow the steps below depending on which engine you want to modify:
 
 ### Windows
 
 If you need to change the Windows's engine you can find the [Visual Studio](https://visualstudio.microsoft.com)
-documented
-files project where you can apply your modification:
+documented files project where you can apply your modification:
 
 ``` bash
 nativeengines

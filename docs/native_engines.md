@@ -1,6 +1,4 @@
-# JVM fine-tuning
-
-If you need to fine-tune native engines, follow the steps below depending on which engine you need to modify
+If you need to apply changes to the native engines, follow the steps below depending on which engine you want to modify
 
 !!! warning
 
@@ -11,8 +9,7 @@ If you need to fine-tune native engines, follow the steps below depending on whi
 ## Windows
 
 If you need to change the Windows's engine you can find the [Visual Studio](https://visualstudio.microsoft.com)
-documented
-files project where you can apply your modification:
+documented files project where you can apply your modification:
 
 ``` bash
 nativeengines
