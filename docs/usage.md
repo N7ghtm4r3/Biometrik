@@ -3,7 +3,7 @@
 In your `App.kt` file you can simply integrate the following component and customize the authentication flow as you
 need
 
-``` kotlin
+```kotlin
 BiometrikAuthenticator(
     appName = "MyApplication",
     title = "Indicative title displayed if the native dialogs allow it",
@@ -27,7 +27,7 @@ BiometrikAuthenticator(
 
 You can also allow the user to retry to authenticate using a custom `state`
 
-``` kotlin
+```kotlin
 // create the custom state
 val state = rememberBiometrikState()
 

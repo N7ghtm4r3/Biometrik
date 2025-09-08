@@ -11,7 +11,7 @@ If you need to apply changes to the native engines, follow the steps below depen
 If you need to change the Windows's engine you can find the [Visual Studio](https://visualstudio.microsoft.com)
 documented files project where you can apply your modification:
 
-``` bash
+```bash
 nativeengines
 ├── windows
     └── ... files ...
@@ -28,7 +28,7 @@ Currently, authentication on Linux is supported via **Polkit**. Biometric suppor
 
 To modify the native engine you can find its file on:
 
-``` bash
+```bash
 nativeengines
 ├── linux
     └── PolkitEngine.c
@@ -44,7 +44,7 @@ gcc -fPIC -shared -o LinuxPolkitEngine.so  PolkitEngine.c $(pkg-config --cflags 
 
 To modify the native engine you can find its file on:
 
-``` bash
+```bash
 nativeengines
 ├── macos
     └── LocalAuthenticationEngine.m
@@ -65,7 +65,7 @@ clang -framework Foundation -framework LocalAuthentication -shared -o LocalAuthe
 
 Once compiled, place the dynamic libraries in the appropriate platform-specific directories
 
-``` bash
+```bash
 resources
 ├── windows
 │   └── WindowsHelloEngine.dll

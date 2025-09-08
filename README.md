@@ -156,7 +156,7 @@ when targeting WebAssembly (WASM)
 In your `App.kt` file you can simply integrate the following component and customize the authentication flow as you
 need:
 
-``` kotlin
+```kotlin
 BiometrikAuthenticator(
     appName = "MyApplication",
     title = "Indicative title displayed if the native dialogs allow it",
@@ -178,7 +178,7 @@ BiometrikAuthenticator(
 
 You can also allow the user to retry to authenticate using a custom `state`:
 
-``` kotlin
+```kotlin
 // create the custom state
 val state = rememberBiometrikState()
 
@@ -225,7 +225,7 @@ If you need to apply changes to the native engines, follow the steps below depen
 If you need to change the Windows's engine you can find the [Visual Studio](https://visualstudio.microsoft.com)
 documented files project where you can apply your modification:
 
-``` bash
+```bash
 nativeengines
 ├── windows
     └── ... files ...
@@ -242,7 +242,7 @@ Currently, authentication on Linux is supported via **Polkit**. Biometric suppor
 
 To modify the native engine you can find its file on:
 
-``` bash
+```bash
 nativeengines
 ├── linux
     └── PolkitEngine.c
@@ -258,7 +258,7 @@ gcc -fPIC -shared -o LinuxPolkitEngine.so  PolkitEngine.c $(pkg-config --cflags 
 
 To modify the native engine you can find its file on:
 
-``` bash
+```bash
 nativeengines
 ├── macos
     └── LocalAuthenticationEngine.m
@@ -278,7 +278,7 @@ clang -framework Foundation -framework LocalAuthentication -shared -o LocalAuthe
 
 Once compiled, place the dynamic libraries in the appropriate platform-specific directories
 
-``` bash
+```bash
 resources
 ├── windows
 │   └── WindowsHelloEngine.dll
