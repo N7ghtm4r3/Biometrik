@@ -31,7 +31,7 @@ provided by each platform
 
 #### Version catalog
 
-```gradle
+```toml
 [versions]
 biometrik = "1.0.0"
 
@@ -43,7 +43,7 @@ biometrik = { module = "io.github.n7ghtm4r3:Biometrik", version.ref = "biometrik
 
 - Add the dependency
 
-    ```gradle
+    ```groovy
     dependencies {
         implementation 'io.github.n7ghtm4r3:Biometrik:1.0.0'
     }
@@ -51,7 +51,7 @@ biometrik = { module = "io.github.n7ghtm4r3:Biometrik", version.ref = "biometrik
 
   #### Gradle (Kotlin)
 
-    ```gradle
+    ```kotlin
     dependencies {
         implementation("io.github.n7ghtm4r3:Biometrik:1.0.0")
     }
@@ -59,7 +59,7 @@ biometrik = { module = "io.github.n7ghtm4r3:Biometrik", version.ref = "biometrik
 
   #### Gradle (version catalog)
 
-    ```gradle
+    ```kotlin
     dependencies {
         implementation(libs.biometrik)
     }
@@ -72,7 +72,7 @@ biometrik = { module = "io.github.n7ghtm4r3:Biometrik", version.ref = "biometrik
 To correctly integrate **Biometrik** on the android target you need to following
 these simple steps:
 
-#### AppCompact integration
+#### AppCompact implementation
 
 The native `BiometricPrompt` api requires that the activity which request the authentication must be an
 `AppCompatActivity` activity, for this, you need to implement in your android's dependencies the following library:
@@ -89,6 +89,8 @@ sourceSets {
 }
 ```
 
+#### Adapting the MainActivity
+
 The next step is to adapt your `MainActivity` to extends the `AppCompatActivity` activity type:
 
 ```kotlin
@@ -100,6 +102,8 @@ class MainActivity : AppCompatActivity() {
 
 }
 ```
+
+#### Configuring theme
 
 The latest step is to change the theme of the `MainActivity` from the `AndroidManifest` file:
 
@@ -192,11 +196,11 @@ BiometrikAuthenticator(
     },
     onFailure = {
         // non-UI action
-        state.reAuth()
+        state.reAuth() // retry to authenticate
         // UI action
         Button(
             onClick = {
-                state.reAuth()
+                state.reAuth() // retry to authenticate
             }
         ) {
             Text(
@@ -275,6 +279,10 @@ resources
 └── macos
     └── LocalAuthenticationEngine.dylib
 ```
+
+## Documentation
+
+Check out the library documentation [here!](https://n7ghtm4r3.github.io/Biometrik/)
 
 ## Support
 

@@ -1,0 +1,74 @@
+# yaml-language-server: $schema=https://squidfunk.github.io/mkdocs-material/schema.json
+
+site_name: Biometrik
+site_description: Biometrik library documentation
+site_url: https://io.github.n7ghtm4r3/Biometrik/
+
+repo_name: Biometrik
+repo_url: https://github.com/N7ghtm4r3/Biometrik
+site_author: Manuel Maurizio
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: lime
+      toggle:
+        icon: material/brightness-4
+        name: Switch to dark mode
+    - scheme: slate
+      primary: lime
+      toggle:
+        icon: material/brightness-7
+        name: Switch to light mode
+  code:
+    highlight_theme:
+      default: material
+      dark: material
+  language: en
+
+  features:
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.footer
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.tabbed:
+      alternate_style: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+  - admonition
+  - pymdownx.details
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - attr_list
+  - md_in_html
+
+plugins:
+  - search
+
+nav:
+  - Overview: index.md
+  - Setup: setup.md
+  - Usage: usage.md
+  - JVM fine-tuning: jvm_fine-tuning.md
+
+extra:
+  social:
+    - icon: material/email
+      link: mailto:infotecknobitcompany@gmail.com
+    - icon: material/bug
+      link: https://github.com/N7ghtm4r3/Biometrik/issues/new
+
+copyright: |
+  &copy; 2025 <a href="https://github.com/N7ghtm4r3" target="new">N7ghtm4r3 - Tecknobit</a>
