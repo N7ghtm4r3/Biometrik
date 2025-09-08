@@ -39,7 +39,9 @@ using namespace Windows::Security::Credentials::UI;
  */
 AuthenticationResult requestAuth(const wchar_t* reason) {
     init_apartment();
-    auto result = UserConsentVerifier::RequestVerificationAsync(reason).get();
+    auto bioAuthRequest = UserConsentVerifier::RequestVerificationAsync(reason);
+    ForcePromptOnTop();
+    auto result = bioAuthRequest.get();
     switch (result)
     {
     case UserConsentVerificationResult::Verified:
@@ -54,5 +56,30 @@ AuthenticationResult requestAuth(const wchar_t* reason) {
         return FEATURE_UNAVAILABLE;
     default:
         return AUTHENTICATION_FAILED;
+    }
+}
+
+/**
+* @brief Tries to force the Windows Hello prompt on top following the https://github.com/bitwarden/clients/issues/5287#issuecomment-3174288892
+* workaround. This workaround not always works due Windows's strict security reasons
+*/
+void ForcePromptOnTop()
+{
+    for (int j = 0; j < FORCE_PROMPT_ON_TOP_MAX_ATTEMPTS; j++)
+    {
+        HWND hwnd = FindWindowW(L"Credential Dialog Xaml Host", nullptr);
+        if (hwnd)
+        {
+            HWND foregroundHwnd = GetForegroundWindow();
+            DWORD currentThreadId = GetCurrentThreadId();
+            DWORD foregroundThreadId = GetWindowThreadProcessId(foregroundHwnd, nullptr);
+            AttachThreadInput(currentThreadId, foregroundThreadId, TRUE);
+            SetForegroundWindow(hwnd);
+            BringWindowToTop(hwnd);
+            SetFocus(hwnd);
+            AttachThreadInput(currentThreadId, foregroundThreadId, FALSE);
+            break;
+        }
+        Sleep(50);
     }
 }

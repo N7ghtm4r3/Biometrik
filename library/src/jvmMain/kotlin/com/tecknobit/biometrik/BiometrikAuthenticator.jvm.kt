@@ -5,6 +5,7 @@ import com.sun.jna.WString
 import com.tecknobit.biometrik.engines.NativeEngine
 import com.tecknobit.biometrik.enums.AuthenticationResult
 import com.tecknobit.biometrik.enums.AuthenticationResult.Companion.toAuthenticationResult
+import kotlinx.coroutines.delay
 
 /**
  * Component used to perform the bio-authentication to authorize the user.
@@ -49,6 +50,7 @@ actual fun BiometrikAuthenticator(
             val nativeEngine = remember { NativeEngine.getInstance() }
             var result: AuthenticationResult? by remember { mutableStateOf(null) }
             LaunchedEffect(state.authAttemptsTrigger.value) {
+                delay(500)
                 result = nativeEngine.requestAuth(
                     reason = WString(reason)
                 ).toAuthenticationResult()

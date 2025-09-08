@@ -7,7 +7,7 @@
 ![Static Badge](https://img.shields.io/badge/desktop-006874)
 ![Static Badge](https://img.shields.io/badge/wasmjs-834C74)
 
-**v1.0.0beta-01**
+**v1.0.0**
 
 **Biometrik** allows to perform the bio-authentication on Compose Multiplatform applications leveraging the native APIs
 provided by each platform
@@ -31,9 +31,9 @@ provided by each platform
 
 #### Version catalog
 
-```gradle
+```toml
 [versions]
-biometrik = "1.0.0beta-01"
+biometrik = "1.0.0"
 
 [libraries]
 biometrik = { module = "io.github.n7ghtm4r3:Biometrik", version.ref = "biometrik" } 
@@ -43,23 +43,23 @@ biometrik = { module = "io.github.n7ghtm4r3:Biometrik", version.ref = "biometrik
 
 - Add the dependency
 
-    ```gradle
+    ```groovy
     dependencies {
-        implementation 'io.github.n7ghtm4r3:Biometrik:1.0.0beta-01'
+        implementation 'io.github.n7ghtm4r3:Biometrik:1.0.0'
     }
     ```
 
   #### Gradle (Kotlin)
 
-    ```gradle
+    ```kotlin
     dependencies {
-        implementation("io.github.n7ghtm4r3:Biometrik:1.0.0beta-01")
+        implementation("io.github.n7ghtm4r3:Biometrik:1.0.0")
     }
     ```
 
   #### Gradle (version catalog)
 
-    ```gradle
+    ```kotlin
     dependencies {
         implementation(libs.biometrik)
     }
@@ -72,7 +72,7 @@ biometrik = { module = "io.github.n7ghtm4r3:Biometrik", version.ref = "biometrik
 To correctly integrate **Biometrik** on the android target you need to following
 these simple steps:
 
-#### AppCompact integration
+#### AppCompact implementation
 
 The native `BiometricPrompt` api requires that the activity which request the authentication must be an
 `AppCompatActivity` activity, for this, you need to implement in your android's dependencies the following library:
@@ -89,6 +89,8 @@ sourceSets {
 }
 ```
 
+#### Adapting the MainActivity
+
 The next step is to adapt your `MainActivity` to extends the `AppCompatActivity` activity type:
 
 ```kotlin
@@ -100,6 +102,8 @@ class MainActivity : AppCompatActivity() {
 
 }
 ```
+
+#### Configuring theme
 
 The latest step is to change the theme of the `MainActivity` from the `AndroidManifest` file:
 
@@ -152,7 +156,7 @@ when targeting WebAssembly (WASM)
 In your `App.kt` file you can simply integrate the following component and customize the authentication flow as you
 need:
 
-``` kotlin
+```kotlin
 BiometrikAuthenticator(
     appName = "MyApplication",
     title = "Indicative title displayed if the native dialogs allow it",
@@ -174,7 +178,7 @@ BiometrikAuthenticator(
 
 You can also allow the user to retry to authenticate using a custom `state`:
 
-``` kotlin
+```kotlin
 // create the custom state
 val state = rememberBiometrikState()
 
@@ -192,11 +196,11 @@ BiometrikAuthenticator(
     },
     onFailure = {
         // non-UI action
-        state.reAuth()
+        state.reAuth() // retry to authenticate
         // UI action
         Button(
             onClick = {
-                state.reAuth()
+                state.reAuth() // retry to authenticate
             }
         ) {
             Text(
@@ -207,17 +211,21 @@ BiometrikAuthenticator(
 )
 ```
 
-## Native Fine-Tuning for JVM Platform
+## Native engines
 
-If you need to fine-tune native engines, follow the steps below depending on which engine you need to modify:
+> [!WARNING]
+> Any pull requests containing dynamic library output files will be rejected for security reasons.  
+> If there are changes to the native engines, please edit the source code and create the pull request
+> **without** including the output files. The maintainers will handle the compilation
+
+If you need to apply changes to the native engines, follow the steps below depending on which engine you want to modify:
 
 ### Windows
 
 If you need to change the Windows's engine you can find the [Visual Studio](https://visualstudio.microsoft.com)
-documented
-files project where you can apply your modification:
+documented files project where you can apply your modification:
 
-``` bash
+```bash
 nativeengines
 ├── windows
     └── ... files ...
@@ -234,7 +242,7 @@ Currently, authentication on Linux is supported via **Polkit**. Biometric suppor
 
 To modify the native engine you can find its file on:
 
-``` bash
+```bash
 nativeengines
 ├── linux
     └── PolkitEngine.c
@@ -250,7 +258,7 @@ gcc -fPIC -shared -o LinuxPolkitEngine.so  PolkitEngine.c $(pkg-config --cflags 
 
 To modify the native engine you can find its file on:
 
-``` bash
+```bash
 nativeengines
 ├── macos
     └── LocalAuthenticationEngine.m
@@ -264,9 +272,13 @@ clang -framework Foundation -framework LocalAuthentication -shared -o LocalAuthe
 
 ### Place the dynamic libraries
 
+> [!Note]
+> This step applies only for **local usage**, do **not** include the compiled libraries in a pull request, or it will
+> be rejected
+
 Once compiled, place the dynamic libraries in the appropriate platform-specific directories
 
-``` bash
+```bash
 resources
 ├── windows
 │   └── WindowsHelloEngine.dll
@@ -275,6 +287,10 @@ resources
 └── macos
     └── LocalAuthenticationEngine.dylib
 ```
+
+## Documentation
+
+Check out the library documentation [here!](https://n7ghtm4r3.github.io/Biometrik/)
 
 ## Support
 

@@ -1,14 +1,13 @@
 [versions]
-agp = "8.7.3"
-android-compileSdk = "35"
+agp = "8.11.1"
+android-compileSdk = "36"
 android-minSdk = "24"
 android-targetSdk = "36"
 dokka = "2.0.0"
 androidx-activity = "1.10.1"
-androidx-lifecycle = "2.9.1"
-composeHotReload = "1.0.0-alpha11"
+androidx-lifecycle = "2.9.3"
 composeMultiplatform = "1.8.2"
-kotlin = "2.2.0"
+kotlin = "2.2.10"
 kotlinx-coroutines = "1.10.2"
 biometric = "1.1.0"
 appcompact = "1.7.1"
@@ -17,9 +16,6 @@ jna = "5.17.0"
 
 [libraries]
 androidx-biometric = { module = "androidx.biometric:biometric", version.ref = "biometric" }
-#TODO: TO DOCU ABOUT ITS INTEGRATION
-# Document also: java.lang.RuntimeException: Unable to start activity ComponentInfo{com.tecknobit.biometrikdemo/com.tecknobit.biometrikdemo.MainActivity}: java.lang.IllegalStateException: You need to use a Theme.AppCompat theme (or descendant) with this activity.
-#
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompact" }
 dokka-base = { module = "org.jetbrains.dokka:dokka-base", version.ref = "dokka" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
@@ -31,9 +27,8 @@ jna = { module = "net.java.dev.jna:jna", version.ref = "jna" }
 
 [plugins]
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
-composeHotReload = { id = "org.jetbrains.compose.hot-reload", version.ref = "composeHotReload" }
 composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
-vanniktech-mavenPublish = { id = "com.vanniktech.maven.publish", version = "0.30.0" }
+vanniktech-mavenPublish = { id = "com.vanniktech.maven.publish", version = "0.34.0" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }

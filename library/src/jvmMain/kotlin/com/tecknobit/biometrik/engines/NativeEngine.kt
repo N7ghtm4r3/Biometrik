@@ -38,12 +38,11 @@ internal interface NativeEngine : Library {
          */
         fun getInstance(): NativeEngine {
             val currentOs = System.getProperty(OS_NAME_KEY)
-            return if (currentOs.startsWith(WINDOWS_OS))
-                windowsEngine
-            else if (currentOs.startsWith(MACOS))
-                macOsEngine
-            else
-                linuxEngine
+            return when {
+                currentOs.startsWith(WINDOWS_OS) -> windowsEngine
+                currentOs.startsWith(MACOS) -> macOsEngine
+                else -> linuxEngine
+            }
         }
 
     }
@@ -82,7 +81,7 @@ internal fun extractDllAbsolutePath(
     tmpDll.deleteOnExit()
     dllContent.use { input ->
         tmpDll.outputStream().use { output ->
-            input.copyTo(output)
+            input!!.copyTo(output)
         }
     }
     return tmpDll.absolutePath
