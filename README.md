@@ -213,7 +213,7 @@ BiometrikAuthenticator(
 
 ## Native Fine-Tuning for JVM Platform
 
-> [WARNING]
+> [!WARNING]
 > Any pull requests containing dynamic library output files will be rejected for security reasons.  
 > If there are changes to the native engines, please edit the source code and create the pull request
 > **without** including the output files. The maintainers will handle the compilation
@@ -273,7 +273,7 @@ clang -framework Foundation -framework LocalAuthentication -shared -o LocalAuthe
 
 ### Place the dynamic libraries
 
-> [Note]
+> [!Note]
 > This step applies only for **local usage**, do **not** include the compiled libraries in a pull request, or it will
 > be rejected
 
