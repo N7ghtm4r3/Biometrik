@@ -2,6 +2,12 @@
 
 If you need to fine-tune native engines, follow the steps below depending on which engine you need to modify
 
+!!! warning
+
+    Any pull requests containing dynamic library output files will be rejected for security reasons.  
+    If there are changes to the native engines, please edit the source code and create the pull request 
+    **without** including the output files. The maintainers will handle the compilation
+
 ## Windows
 
 If you need to change the Windows's engine you can find the [Visual Studio](https://visualstudio.microsoft.com)
@@ -54,6 +60,11 @@ clang -framework Foundation -framework LocalAuthentication -shared -o LocalAuthe
 ```
 
 ## Place the dynamic libraries
+
+!!! note
+
+    This step applies only for **local usage**, do **not** include the compiled libraries in a pull request, or it will 
+    be rejected
 
 Once compiled, place the dynamic libraries in the appropriate platform-specific directories
 
