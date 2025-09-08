@@ -23,10 +23,6 @@ theme:
       toggle:
         icon: material/brightness-7
         name: Switch to light mode
-  code:
-    highlight_theme:
-      default: material
-      dark: material
   language: en
 
   features:
@@ -39,10 +35,6 @@ theme:
     - navigation.footer
 
 markdown_extensions:
-  - pymdownx.highlight:
-      anchor_linenums: true
-      line_spans: __span
-      pygments_lang_class: true
   - pymdownx.tabbed:
       alternate_style: true
       slugify: !!python/object/apply:pymdownx.slugs.slugify
@@ -50,11 +42,15 @@ markdown_extensions:
           case: lower
   - admonition
   - pymdownx.details
+  - attr_list
+  - md_in_html
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.superfences
-  - attr_list
-  - md_in_html
 
 plugins:
   - search
