@@ -46,7 +46,6 @@ private const val INVALID_STATE_ERROR = "InvalidStateError"
  * so will be invoked [onSuccess] if it has been not customized
  */
 @Composable
-@ExperimentalComposeApi
 actual fun BiometrikAuthenticator(
     state: BiometrikState,
     appName: String,
@@ -110,7 +109,6 @@ actual fun BiometrikAuthenticator(
  * so will be invoked [onSuccess] if it has been not customized
  */
 @Composable
-@ExperimentalComposeApi
 private fun performBioAuth(
     state: BiometrikState,
     appName: String,
@@ -201,7 +199,6 @@ private fun credentialsNavigator(): CredentialsNavigator = js("window.navigator.
  * so will be invoked [onSuccess] if it has been not customized
  */
 @Composable
-@ExperimentalComposeApi
 private fun registerNewKeyAndAuth(
     state: BiometrikState,
     challenge: Uint8Array,
@@ -295,7 +292,6 @@ private fun createPublicKey(
  * so will be invoked [onSuccess] if it has been not customized
  */
 @Composable
-@ExperimentalComposeApi
 private fun retrieveExistingKeyAndAuth(
     state: BiometrikState,
     challenge: Uint8Array,
@@ -363,7 +359,6 @@ private fun obtainPublicKey(
  * so will be invoked [onSuccess] if it has been not customized
  */
 @Composable
-@ExperimentalComposeApi
 private fun handleAuth(
     state: BiometrikState,
     authRoutine: suspend () -> Unit,

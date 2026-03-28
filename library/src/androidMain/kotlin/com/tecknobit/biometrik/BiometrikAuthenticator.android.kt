@@ -25,7 +25,6 @@ import androidx.compose.runtime.*
  * so will be invoked [onSuccess] if it has been not customized
  */
 @Composable
-@ExperimentalComposeApi
 actual fun BiometrikAuthenticator(
     state: BiometrikState,
     appName: String,

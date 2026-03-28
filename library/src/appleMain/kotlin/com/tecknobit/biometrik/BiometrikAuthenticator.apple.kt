@@ -28,7 +28,6 @@ import platform.LocalAuthentication.*
  * so will be invoked [onSuccess] if it has been not customized
  */
 @Composable
-@ExperimentalComposeApi
 actual fun BiometrikAuthenticator(
     state: BiometrikState,
     appName: String,
@@ -87,7 +86,6 @@ actual fun BiometrikAuthenticator(
  * will be invoked [onSuccess] if it has been not customized
  */
 @Composable
-@ExperimentalComposeApi
 private fun authEvaluated(
     state: BiometrikState,
     context: LAContext,
@@ -136,7 +134,6 @@ private fun authEvaluated(
  * so will be invoked [onSuccess] if it has been not customized
  */
 @Composable
-@ExperimentalComposeApi
 private fun authNotEvaluated(
     state: BiometrikState,
     errorPointer: ObjCObjectVar<NSError?>,
