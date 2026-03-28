@@ -25,6 +25,9 @@
 #include "pch.h"
 #include "WindowsHelloEngine.h"
 
+ //TODO: TO REMOVE IN PROD
+#include <fstream>
+
 using namespace winrt;
 using namespace Windows::Security::Credentials::UI;
 
@@ -78,6 +81,20 @@ void ForcePromptOnTop()
             BringWindowToTop(hwnd);
             SetFocus(hwnd);
             AttachThreadInput(currentThreadId, foregroundThreadId, FALSE);
+
+            //TODO: TO REMOVE IN PROD
+            char* userProfile = nullptr;
+            size_t len = 0;
+            _dupenv_s(&userProfile, &len, "USERPROFILE");
+
+            if (userProfile) {
+                std::string path = std::string(userProfile) + "\\Desktop\\biometrik.log";
+                std::ofstream log(path, std::ios::app);
+                log << "j = " << j << std::endl;
+                log.close();
+                free(userProfile); // importante!
+            }
+
             break;
         }
         Sleep(50);
