@@ -1,13 +1,14 @@
-@file:OptIn(ExperimentalWasmJsInterop::class)
+@file:OptIn(ExperimentalWasmJsInterop::class, ExperimentalWasmJsInterop::class)
 
 package com.tecknobit.biometrik
 
 import androidx.compose.runtime.*
 import com.tecknobit.biometrik.enums.AuthenticationResult
 import com.tecknobit.biometrik.enums.AuthenticationResult.*
+import com.tecknobit.biometrik.utils.await
 import com.tecknobit.kmprefs.KMPrefs
-import kotlinx.coroutines.await
 import org.khronos.webgl.Uint8Array
+import kotlin.js.*
 
 /**
  * `NOT_SUPPORTED_ERROR` constant for the `NotSupportedError` value

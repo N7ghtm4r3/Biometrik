@@ -103,6 +103,7 @@ kotlin {
 
         val webMain by getting {
             dependencies {
+                implementation(libs.kotlin.browser)
                 implementation(libs.kmprefs)
             }
         }
@@ -125,14 +126,13 @@ kotlin {
 mavenPublishing {
     configure(
         KotlinMultiplatform(
-            javadocJar = JavadocJar.Dokka("dokkaHtml"),
-            sourcesJar = true,
+            javadocJar = JavadocJar.Dokka("dokkaGenerate"),
             androidVariantsToPublish = listOf("release"),
         )
     )
     coordinates(
         groupId = "io.github.n7ghtm4r3",
-        artifactId = "Biometrik",
+        artifactId = "biometrik",
         version = "1.0.1-beta01"
     )
     pom {

@@ -1,6 +1,8 @@
+@file:OptIn(ExperimentalWasmJsInterop::class)
+
 package com.tecknobit.biometrik
 
-import kotlin.js.Promise
+import kotlin.js.*
 
 /**
  * The `PublicKeyCredential` class maps the native [PublicKeyCredential](https://developer.mozilla.org/en-US/docs/Web/API/PublicKeyCredential/response)
