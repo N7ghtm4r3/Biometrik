@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalWasmJsInterop::class)
+
 package com.tecknobit.biometrik
 
 import androidx.compose.runtime.*
@@ -125,7 +127,7 @@ private fun performBioAuth(
     val localStorage = KMPrefs(
         path = appName
     )
-    val keyId = localStorage.retrieveString(
+    val keyId: String? = localStorage.retrieve(
         key = appName
     )
     if (keyId == null) {
@@ -224,7 +226,7 @@ private fun registerNewKeyAndAuth(
             val publicKeyCredential = credentialsNavigator.create(
                 publicKey = publicKey
             ).await<PublicKeyCredential>()
-            localStorage.storeString(
+            localStorage.store(
                 key = appName,
                 value = publicKeyCredential.id.toString()
             )

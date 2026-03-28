@@ -33,7 +33,7 @@ provided by each platform
 
 ```toml
 [versions]
-biometrik = "1.0.0"
+biometrik = "1.0.1"
 
 [libraries]
 biometrik = { module = "io.github.n7ghtm4r3:Biometrik", version.ref = "biometrik" } 
@@ -45,7 +45,7 @@ biometrik = { module = "io.github.n7ghtm4r3:Biometrik", version.ref = "biometrik
 
     ```groovy
     dependencies {
-        implementation 'io.github.n7ghtm4r3:Biometrik:1.0.0'
+        implementation 'io.github.n7ghtm4r3:Biometrik:1.0.1'
     }
     ```
 
@@ -53,7 +53,7 @@ biometrik = { module = "io.github.n7ghtm4r3:Biometrik", version.ref = "biometrik
 
     ```kotlin
     dependencies {
-        implementation("io.github.n7ghtm4r3:Biometrik:1.0.0")
+        implementation("io.github.n7ghtm4r3:Biometrik:1.0.1")
     }
     ```
 
@@ -315,4 +315,4 @@ If you want support project and developer
 If you want support project and developer
 with <a href="https://www.paypal.com/donate/?hosted_button_id=5QMN5UQH7LDT4">PayPal</a>
 
-Copyright © 2025 Tecknobit
+Copyright © 2026 Tecknobit
