@@ -10,6 +10,7 @@ site_author: Manuel Maurizio
 
 theme:
   name: material
+  custom_dir: overrides
   palette:
     - scheme: default
       primary: green
