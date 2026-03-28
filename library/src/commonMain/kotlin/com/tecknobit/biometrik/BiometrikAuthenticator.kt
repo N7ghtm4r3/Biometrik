@@ -1,7 +1,6 @@
 package com.tecknobit.biometrik
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.ExperimentalComposeApi
 import com.tecknobit.biometrik.enums.AuthenticationResult
 import com.tecknobit.biometrik.enums.AuthenticationResult.*
 
@@ -32,7 +31,6 @@ import com.tecknobit.biometrik.enums.AuthenticationResult.*
  * so will be invoked [onSuccess] if it has been not customized
  */
 @Composable
-@ExperimentalComposeApi
 expect fun BiometrikAuthenticator(
     state: BiometrikState = rememberBiometrikState(),
     appName: String,
@@ -53,7 +51,6 @@ expect fun BiometrikAuthenticator(
  * @param onAuth The callback to invoke whether the bio-authentication is to perform
  */
 @Composable
-@ExperimentalComposeApi
 internal fun authenticateIfNeeded(
     state: BiometrikState,
     onSkip: @Composable () -> Unit,
@@ -83,7 +80,6 @@ internal fun authenticateIfNeeded(
  * so will be invoked [onSuccess] if it has been not customized
  */
 @Composable
-@ExperimentalComposeApi
 internal fun handleAuthenticationResult(
     state: BiometrikState,
     authenticationResult: AuthenticationResult?,

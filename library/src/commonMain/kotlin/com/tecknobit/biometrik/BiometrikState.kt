@@ -1,7 +1,6 @@
 package com.tecknobit.biometrik
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.ExperimentalComposeApi
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.saveable.Saver
@@ -17,7 +16,6 @@ import kotlin.random.Random
  * @return the state as [BiometrikState]
  */
 @Composable
-@ExperimentalComposeApi
 fun rememberBiometrikState(
     requestOneTimeOnly: Boolean = true,
 ): BiometrikState {
@@ -40,7 +38,6 @@ fun rememberBiometrikState(
  *
  * @author Tecknobit - N7ghtm4r3
  */
-@ExperimentalComposeApi
 class BiometrikState internal constructor(
     val requestOneTimeOnly: Boolean = true,
     internal var alreadyAuthenticated: Boolean = false,
@@ -88,7 +85,6 @@ class BiometrikState internal constructor(
  *
  * @see Saver
  */
-@ExperimentalComposeApi
 internal object BiometrikStateSaver : Saver<BiometrikState, Array<Any>> {
 
     /**
