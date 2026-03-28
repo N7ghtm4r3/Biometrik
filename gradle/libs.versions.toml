@@ -14,6 +14,7 @@ appcompact = "1.7.1"
 kmprefs = "1.1.1"
 jna = "5.18.1"
 mavenPublish = "0.36.0"
+kotlin-browser = "0.5.0"
 
 [libraries]
 androidx-biometric = { module = "androidx.biometric:biometric", version.ref = "biometric" }
@@ -24,6 +25,7 @@ androidx-lifecycle-runtimeCompose = { module = "org.jetbrains.androidx.lifecycle
 kotlinx-coroutinesSwing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
 kmprefs = { module = "io.github.n7ghtm4r3:kmprefs", version.ref = "kmprefs" }
 jna = { module = "net.java.dev.jna:jna", version.ref = "jna" }
+kotlin-browser = { module = "org.jetbrains.kotlinx:kotlinx-browser", version.ref = "kotlin-browser" }
 
 [plugins]
 composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
