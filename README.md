@@ -7,7 +7,7 @@
 ![Static Badge](https://img.shields.io/badge/desktop-006874)
 ![Static Badge](https://img.shields.io/badge/wasmjs-834C74)
 
-**v1.0.0**
+**v1.0.1**
 
 **Biometrik** allows to perform the bio-authentication on Compose Multiplatform applications leveraging the native APIs
 provided by each platform
@@ -36,7 +36,7 @@ provided by each platform
 biometrik = "1.0.1"
 
 [libraries]
-biometrik = { module = "io.github.n7ghtm4r3:Biometrik", version.ref = "biometrik" } 
+biometrik = { module = "io.github.n7ghtm4r3:biometrik", version.ref = "biometrik" } 
 ```
 
 #### Gradle
@@ -45,7 +45,7 @@ biometrik = { module = "io.github.n7ghtm4r3:Biometrik", version.ref = "biometrik
 
     ```groovy
     dependencies {
-        implementation 'io.github.n7ghtm4r3:Biometrik:1.0.1'
+        implementation 'io.github.n7ghtm4r3:biometrik:1.0.1'
     }
     ```
 
@@ -53,7 +53,7 @@ biometrik = { module = "io.github.n7ghtm4r3:Biometrik", version.ref = "biometrik
 
     ```kotlin
     dependencies {
-        implementation("io.github.n7ghtm4r3:Biometrik:1.0.1")
+        implementation("io.github.n7ghtm4r3:biometrik:1.0.1")
     }
     ```
 

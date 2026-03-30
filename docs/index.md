@@ -23,7 +23,7 @@ provided by each platform
 
 ```groovy
 dependencies {
-    implementation 'io.github.n7ghtm4r3:Biometrik:1.0.1'
+    implementation 'io.github.n7ghtm4r3:biometrik:1.0.1'
 }
 ```
 
@@ -31,7 +31,7 @@ dependencies {
 
 ```kotlin
 dependencies {
-    implementation("io.github.n7ghtm4r3:Biometrik:1.0.1")
+    implementation("io.github.n7ghtm4r3:biometrik:1.0.1")
 }
 ```
 
@@ -44,7 +44,7 @@ dependencies {
 biometrik = "1.0.1"
 
 [libraries]
-biometrik = { module = "io.github.n7ghtm4r3:Biometrik", version.ref = "biometrik" } 
+biometrik = { module = "io.github.n7ghtm4r3:biometrik", version.ref = "biometrik" } 
 ```
 
 #### build.gradle
