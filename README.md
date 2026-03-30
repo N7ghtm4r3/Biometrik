@@ -1,6 +1,6 @@
 # Biometrik
 
-![Maven Central](https://img.shields.io/maven-central/v/io.github.n7ghtm4r3/Biometrik.svg?label=Maven%20Central)
+![Maven Central](https://img.shields.io/maven-central/v/io.github.n7ghtm4r3/biometrik.svg?label=Maven%20Central)
 
 ![Static Badge](https://img.shields.io/badge/android-4280511051)
 ![Static Badge](https://img.shields.io/badge/ios-445E91)
