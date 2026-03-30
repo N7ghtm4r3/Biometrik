@@ -14,7 +14,7 @@ plugins {
 }
 
 group = "com.teknobit.biometrik"
-version = "1.0.1-beta01"
+version = "1.0.1"
 
 kotlin {
     androidLibrary {
@@ -133,7 +133,7 @@ mavenPublishing {
     coordinates(
         groupId = "io.github.n7ghtm4r3",
         artifactId = "biometrik",
-        version = "1.0.1-beta01"
+        version = "1.0.1"
     )
     pom {
         name.set("Biometrik")
