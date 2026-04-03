@@ -62,32 +62,44 @@ typedef NS_ENUM(NSInteger, AuthenticationResult) {
  *
  * @return An @ref AuthenticationResult indicating the result of the authentication request
  */
-AuthenticationResult requestAuth(NSString *reason) {
-    LAContext *context = [[LAContext alloc] init];
-    NSError *error = nil;
-    if (![context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]) {
-        switch (error.code) {
-            case LAErrorBiometryNotEnrolled:
-                return AuthenticationNotSet;
-            case LAErrorBiometryNotAvailable:
-                return FeatureUnavailable;
-            case LAErrorPasscodeNotSet:
-                return AuthenticationNotSet;
-            default:
-                return AuthenticationFailed;
-        }
-    }
-    if (@available(macOS 10.12.2, *))
-        if (context.biometryType == LABiometryTypeNone)
-            return HardwareUnavailable;
+AuthenticationResult requestAuth(const char *reason) {
+    NSString *nsReason = [NSString stringWithUTF8String:reason];
+    __block AuthenticationResult result = AuthenticationFailed;
+
     dispatch_semaphore_t sema = dispatch_semaphore_create(0);
-    __block BOOL success = NO;
-    [context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics
-            localizedReason: reason
-                      reply:^(BOOL s, NSError * _Nullable authError) {
-        success = s;
-        dispatch_semaphore_signal(sema);
-    }];
-    dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
-    return success ? AuthenticationSuccess : AuthenticationFailed;
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        LAContext *context = [[LAContext alloc] init];
+        NSError *error = nil;
+
+        if (![context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]) {
+            switch (error.code) {
+                case LAErrorBiometryNotEnrolled:
+                case LAErrorPasscodeNotSet:
+                    result = AuthenticationNotSet; break;
+                case LAErrorBiometryNotAvailable:
+                    result = FeatureUnavailable; break;
+                case LAErrorBiometryLockout:
+                    result = AuthenticationFailed; break;
+                default:
+                    result = AuthenticationFailed; break;
+            }
+            dispatch_semaphore_signal(sema);
+            return;
+        }
+
+        [context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics
+                localizedReason:nsReason
+                          reply:^(BOOL success, NSError * _Nullable authError) {
+            result = success ? AuthenticationSuccess : AuthenticationFailed;
+            dispatch_semaphore_signal(sema);
+        }];
+    });
+
+    dispatch_time_t timeout = dispatch_time(DISPATCH_TIME_NOW, 30 * NSEC_PER_SEC);
+    if (dispatch_semaphore_wait(sema, timeout) != 0) {
+        return AuthenticationFailed;
+    }
+
+    return result;
 }
