@@ -65,14 +65,13 @@ typedef NS_ENUM(NSInteger, AuthenticationResult) {
 AuthenticationResult requestAuth(const char *reason) {
     NSString *nsReason = [NSString stringWithUTF8String:reason];
     __block AuthenticationResult result = AuthenticationFailed;
-
-    dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+    __block BOOL done = NO;
 
     dispatch_async(dispatch_get_main_queue(), ^{
         LAContext *context = [[LAContext alloc] init];
         NSError *error = nil;
 
-        if (![context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]) {
+        if (![context canEvaluatePolicy:LAPolicyDeviceOwnerAuthentication error:&error]) {
             switch (error.code) {
                 case LAErrorBiometryNotEnrolled:
                 case LAErrorPasscodeNotSet:
@@ -84,22 +83,23 @@ AuthenticationResult requestAuth(const char *reason) {
                 default:
                     result = AuthenticationFailed; break;
             }
-            dispatch_semaphore_signal(sema);
+            done = YES;
             return;
         }
 
-        [context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics
+        [context evaluatePolicy:LAPolicyDeviceOwnerAuthentication
                 localizedReason:nsReason
                           reply:^(BOOL success, NSError * _Nullable authError) {
             result = success ? AuthenticationSuccess : AuthenticationFailed;
-            dispatch_semaphore_signal(sema);
+            done = YES;
         }];
     });
 
-    dispatch_time_t timeout = dispatch_time(DISPATCH_TIME_NOW, 30 * NSEC_PER_SEC);
-    if (dispatch_semaphore_wait(sema, timeout) != 0) {
-        return AuthenticationFailed;
+    NSDate *deadline = [NSDate dateWithTimeIntervalSinceNow:30.0];
+    while (!done && [deadline timeIntervalSinceNow] > 0) {
+        [[NSRunLoop mainRunLoop] runMode:NSDefaultRunLoopMode
+                              beforeDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
     }
 
-    return result;
+    return done ? result : AuthenticationFailed;
 }
