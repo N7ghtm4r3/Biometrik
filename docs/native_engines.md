@@ -53,7 +53,7 @@ nativeengines
 After applied the modification you needed, you can compile it with the below command:
 
 ```bash
-clang -framework Foundation -framework LocalAuthentication -shared -o LocalAuthenticationEngine.dylib LocalAuthenticationEngine.m
+clang -arch x86_64 -arch arm64 -framework Foundation -framework LocalAuthentication -dynamiclib -o LocalAuthenticationEngine.dylib LocalAuthenticationEngine.m
 ```
 
 ## Place the dynamic libraries
