@@ -3,9 +3,9 @@
 ![Maven Central](https://img.shields.io/maven-central/v/io.github.n7ghtm4r3/biometrik.svg?label=Maven%20Central)
 
 ![Static Badge](https://img.shields.io/badge/android-4280511051)
-![Static Badge](https://img.shields.io/badge/ios-445E91)
+![Static Badge](https://img.shields.io/badge/apple-445E91)
 ![Static Badge](https://img.shields.io/badge/desktop-006874)
-![Static Badge](https://img.shields.io/badge/wasmjs-834C74)
+![Static Badge](https://img.shields.io/badge/web-834C74)
 
 **v1.0.2**
 
