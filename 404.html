@@ -1,0 +1,631 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Biometrik library documentation">
+      
+      
+        <meta name="author" content="Manuel Maurizio">
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="/Biometrik/assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Biometrik</title>
+      
+    
+    
+      <link rel="stylesheet" href="/Biometrik/assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="/Biometrik/assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("/Biometrik/",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="/Biometrik/." title="Biometrik" class="md-header__button md-logo" aria-label="Biometrik" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Biometrik
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="green" data-md-color-accent="teal"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/N7ghtm4r3/Biometrik" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Biometrik
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="/Biometrik/." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Overview
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="/Biometrik/setup/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Setup
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="/Biometrik/usage/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Usage
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="/Biometrik/native_engines/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Native engines
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="/Biometrik/." title="Biometrik" class="md-nav__button md-logo" aria-label="Biometrik" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Biometrik
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/N7ghtm4r3/Biometrik" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Biometrik
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/Biometrik/." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/Biometrik/setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/Biometrik/usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Usage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="/Biometrik/native_engines/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native engines
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+<div style="
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 65vh;
+    text-align: center;
+">
+    <svg xmlns="http://www.w3.org/2000/svg" width="982.48732"
+         height="763.01413" viewBox="0 0 982.48732 763.01413" role="img" artist="Katerina Limpitsouni"
+         source="https://undraw.co/">
+        <circle cx="559.4329" cy="333.06116" r="40.02979" fill="#e6e6e6"/>
+        <path d="M766.295,452.99465l-41.832-41.832a44.307,44.307,0,0,0-14.42627-61.92578,44.45758,44.45758,0,0,0-58.91358,12.23779,44.30652,44.30652,0,0,0,60.03321,62.99512l41.832,41.832A9.40939,9.40939,0,0,0,766.295,452.99465ZM709.59431,409.6011a31.68421,31.68421,0,1,1,9.27978-22.40381A31.58568,31.58568,0,0,1,709.59431,409.6011Z"
+              transform="translate(-108.75634 -68.49293)" fill="#3f3d56"/>
+        <path d="M1069.529,514.69884C1176.50914,633.00725,866.39184,803.50707,615.8095,803.50707S191.86334,671.39983,162.09,514.69884C89.89987,134.75174,777.16735-106.74054,615.8095,225.89055,380.61181,710.73882,985.27984,421.5284,1069.529,514.69884Z"
+              transform="translate(-108.75634 -68.49293)" fill="#e6e6e6"/>
+        <path d="M1021.529,542.69884C1128.50914,661.00725,818.39184,831.50707,567.8095,831.50707S143.86334,699.39983,114.09,542.69884C41.89987,162.75174,729.16735-78.74054,567.8095,253.89055,332.61181,738.73882,937.27984,449.5284,1021.529,542.69884Z"
+              transform="translate(-108.75634 -68.49293)" fill="#3f3d56"/>
+        <path d="M258.35026,265.31823c-75.06741-3.30525-133.27133-19.49788-132.50668-36.86436.45844-10.41178,21.70324-18.7842,58.28677-22.96955a1,1,0,1,1,.22727,1.987c-34.46168,3.943-56.11733,12.01678-56.516,21.07051-.69148,15.70451,59.11433,31.63093,130.59659,34.77832s132.4564-7.461,133.14787-23.16554c.40032-9.09178-20.59681-19.06558-54.79775-26.0284a1.00008,1.00008,0,1,1,.3991-1.95993c36.3011,7.39058,56.85694,17.624,56.39672,28.0763C392.81953,257.60908,333.41767,268.62348,258.35026,265.31823Z"
+              transform="translate(-108.75634 -68.49293)" fill="#4cae4f"/>
+        <path d="M191.67927,268.22672a76.98277,76.98277,0,0,0,133.03578,5.52178A1211.97551,1211.97551,0,0,1,191.67927,268.22672Z"
+              transform="translate(-108.75634 -68.49293)" fill="#4cae4f"/>
+        <path d="M333.019,252.71347a76.997,76.997,0,1,0-147.74945-5.70562A572.23325,572.23325,0,0,0,333.019,252.71347Z"
+              transform="translate(-108.75634 -68.49293)" fill="#4cae4f"/>
+        <circle cx="168.83353" cy="123.60073" r="9" fill="#fff"/>
+        <circle cx="122.51347" cy="152.59128" r="15" fill="#fff"/>
+        <circle cx="348.90479" cy="142.89813" r="9.99975" fill="#4cae4f"/>
+        <circle cx="122.90479" cy="452.89813" r="6.00007" fill="#e6e6e6"/>
+        <circle cx="542.90479" cy="658.89813" r="6.00007" fill="#e6e6e6"/>
+        <circle cx="151.90479" cy="339.89813" r="3.00007" fill="#e6e6e6"/>
+        <circle cx="399.90479" cy="563.89813" r="3.00007" fill="#e6e6e6"/>
+        <circle cx="850.90479" cy="534.89813" r="3.00007" fill="#e6e6e6"/>
+        <circle cx="709.90479" cy="623.89813" r="3.00007" fill="#e6e6e6"/>
+        <circle cx="562.90479" cy="515.89813" r="3.00007" fill="#e6e6e6"/>
+        <circle cx="372.90479" cy="219.89813" r="3.00007" fill="#e6e6e6"/>
+        <circle cx="396.90479" cy="71.89813" r="3.00007" fill="#e6e6e6"/>
+        <circle cx="382.90479" cy="694.89813" r="3.00007" fill="#e6e6e6"/>
+        <circle cx="234.90479" cy="631.89813" r="3.00007" fill="#e6e6e6"/>
+        <circle cx="703.90479" cy="523.89813" r="3.00007" fill="#e6e6e6"/>
+        <circle cx="148.3737" cy="224.7987" r="9" fill="#fff"/>
+        <path d="M460.6612,431.39114c0,26.88035-41.55939,89.516-53.70465,107.24669a3.99188,3.99188,0,0,1-6.5907,0c-12.14526-17.73066-53.70465-80.36634-53.70465-107.24669a57,57,0,1,1,114,0Z"
+              transform="translate(-108.75634 -68.49293)" fill="#fff"/>
+        <circle cx="294.90486" cy="358.8982" r="29" fill="#4cae4f"/>
+        <ellipse cx="294.40486" cy="496.3982" rx="33.5" ry="6.5" fill="#fff"/>
+        <path d="M925.60957,386.41245a10.52681,10.52681,0,0,0-.64106,1.52851l-47.783,13.27682-8.61085-8.42662L854.1589,404.12429,867.953,420.52338a8,8,0,0,0,9.35283,2.169l51.61632-22.78484a10.49709,10.49709,0,1,0-3.31256-13.49509Z"
+              transform="translate(-108.75634 -68.49293)" fill="#ffb8b8"/>
+        <path d="M875.50191,401.996l-17.9352,13.95958a4.5,4.5,0,0,1-6.68163-1.33719L839.73843,394.891a12.49741,12.49741,0,0,1,19.76923-15.29426l16.33819,15.59379a4.5,4.5,0,0,1-.34394,6.80543Z"
+              transform="translate(-108.75634 -68.49293)" fill="#4cae4f"/>
+        <path d="M930.19158,379.80967l18.18807,8.1829a3.14913,3.14913,0,0,1,1.57976,4.16384l-2.15339,4.78633a1.05293,1.05293,0,0,1,.52659,1.38795l-.86136,1.91453a1.05292,1.05292,0,0,1-1.388.52659l-.86136,1.91453a1.05292,1.05292,0,0,1,.52659,1.388l-.86136,1.91453a1.0529,1.0529,0,0,1-1.38794.52659L931.8709,432.36162a3.14914,3.14914,0,0,1-4.16384,1.57977l-18.18807-8.1829a3.14915,3.14915,0,0,1-1.57977-4.16384l18.08852-40.20522A3.14913,3.14913,0,0,1,930.19158,379.80967Z"
+              transform="translate(-108.75634 -68.49293)" fill="#3f3d56"/>
+        <path d="M912.82137,423.21181l14.59056,6.57106a3.03424,3.03424,0,0,0,3.99937-1.51155l6.73892-14.98951,2.34078-5.196,6.09875-13.562a3.026,3.026,0,0,0-1.51149-3.98886l-4.58726-2.06786L930.47694,383.964a3.02112,3.02112,0,0,0-3.98861,1.522L920.589,398.59669l-6.7179,14.92653-2.56118,5.69979A3.022,3.022,0,0,0,912.82137,423.21181Z"
+              transform="translate(-108.75634 -68.49293)" fill="#f2f2f2"/>
+        <polygon points="773.577 540.443 785.837 540.442 791.67 493.154 773.575 493.155 773.577 540.443"
+                 fill="#ffb8b8"/>
+        <path d="M879.2066,604.93325l24.1438-.001h.001a15.38605,15.38605,0,0,1,15.38648,15.38623v.5l-39.53052.00146Z"
+              transform="translate(-108.75634 -68.49293)" fill="#2f2e41"/>
+        <polygon points="805.577 537.443 817.837 537.442 823.67 490.154 805.575 490.155 805.577 537.443"
+                 fill="#ffb8b8"/>
+        <path d="M911.2066,601.93325l24.1438-.001h.001a15.38605,15.38605,0,0,1,15.38648,15.38623v.5l-39.53052.00146Z"
+              transform="translate(-108.75634 -68.49293)" fill="#2f2e41"/>
+        <path d="M827.34138,497.97109a39.41035,39.41035,0,0,0,36.8999,26.81006l.62012.01c6.32959.18,13.75976-1.86,21.0498-4.79,14.3999-5.79,28.23-15.06,31.8999-17.61l-6.21972,59.79-2.52,24.24a4.51415,4.51415,0,0,0,4.48,4.97h15.52978a4.50547,4.50547,0,0,0,4.35987-3.36l25.64013-97.65a19.032,19.032,0,0,0-19.71-23.83l-53.25976,3.65,3.71972-14.88-47.54-3.16-.13965.1c-1.14013.83-2.25,1.7-3.31005,2.61a40.27149,40.27149,0,0,0-6.99024,7.66A38.48741,38.48741,0,0,0,827.34138,497.97109Z"
+              transform="translate(-108.75634 -68.49293)" fill="#2f2e41"/>
+        <path d="M827.34138,497.97109a39.41035,39.41035,0,0,0,36.8999,26.81006,196.14623,196.14623,0,0,0,22.56982-13.39l-.8999,8.61-7.83984,75.42a4.51415,4.51415,0,0,0,4.48,4.97h15.52978a4.50547,4.50547,0,0,0,4.35987-3.36l9.15039-34.85,16.48974-62.8a19.032,19.032,0,0,0-19.71-23.83l-53.25976,3.65,3.71972-14.88-26.98-1.79A38.48741,38.48741,0,0,0,827.34138,497.97109Z"
+              transform="translate(-108.75634 -68.49293)" fill="#2f2e41"/>
+        <path d="M838.7735,458.32082l-.35766-.043-8.29517-40.78515c-.071-.354-6.85229-35.5332,13.93677-53.92432l.36182-2.51709a4.50032,4.50032,0,0,1,5.78711-3.65771l19.58471,6.0747a4.49086,4.49086,0,0,1,3.019,5.4419l-1.90381,7.2417c2.63989,3.1001,33.7146,40.51221,22.89038,69.33545L888.9488,464.439Z"
+              transform="translate(-108.75634 -68.49293)" fill="#4cae4f"/>
+        <path d="M920.09389,426.48986a10.52591,10.52591,0,0,0-1.32908.99037l-47.89739-12.858-3.13136-11.634-18.17538,2.43095,3.54192,21.13437a8,8,0,0,0,6.95146,6.62248l56.032,6.619a10.4971,10.4971,0,1,0,4.00785-13.30516Z"
+              transform="translate(-108.75634 -68.49293)" fill="#ffb8b8"/>
+        <path d="M869.022,414.43646,846.48068,417.34a4.5,4.5,0,0,1-5.07405-4.54822l.42987-22.65461a12.49741,12.49741,0,0,1,24.79917-3.12052l6.14215,21.73423a4.5,4.5,0,0,1-3.75583,5.68559Z"
+              transform="translate(-108.75634 -68.49293)" fill="#4cae4f"/>
+        <circle cx="753.92061" cy="258.80372" r="24.56103" fill="#ffb8b8"/>
+        <path d="M861.3848,329.34791l-3.075-5.59966c-5.82461,23.73215,4.46383,43.37315,4.46383,43.37315l-39.93243-18.601.38033-6.59991-3.95134,4.484-5.67747-3.12872-.74992-4.28064-4.28563,1.06158,15.64354-28.38736c15.18238-27.01314,37.25508-16.69982,37.25508-16.69982,35.11544-1.66934,30.82681,32.97543,30.82681,32.97543Z"
+              transform="translate(-108.75634 -68.49293)" fill="#2f2e41"/>
+        <ellipse cx="556.1612" cy="472.39114" rx="12.17949" ry="47.5"
+                 transform="translate(-275.75171 306.36236) rotate(-32.66242)" fill="#3f3d56"/>
+    </svg>
+    <h1 style="margin-top: 40px;">Page not found</h1>
+</div>
+
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2026 <a href="https://github.com/N7ghtm4r3" target="new">N7ghtm4r3 - Tecknobit</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="mailto:infotecknobitcompany@gmail.com" target="_blank" rel="noopener" title="" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m20 8-8 5-8-5V6l8 5 8-5m0-2H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/N7ghtm4r3/Biometrik/issues/new" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 12h-4v-2h4m0 6h-4v-2h4m6-6h-2.81a6 6 0 0 0-1.82-1.96L17 4.41 15.59 3l-2.17 2.17a6 6 0 0 0-2.83 0L8.41 3 7 4.41l1.62 1.63C7.88 6.55 7.26 7.22 6.81 8H4v2h2.09c-.05.33-.09.66-.09 1v1H4v2h2v1c0 .34.04.67.09 1H4v2h2.81c1.04 1.79 2.97 3 5.19 3s4.15-1.21 5.19-3H20v-2h-2.09c.05-.33.09-.66.09-1v-1h2v-2h-2v-1c0-.34-.04-.67-.09-1H20z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "/Biometrik/", "features": ["search.suggest", "search.highlight", "search.share", "content.code.copy", "navigation.tabs", "navigation.tabs.sticky", "navigation.footer"], "search": "/Biometrik/assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="/Biometrik/assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
